@@ -1,15 +1,39 @@
 {
-  "name": "myapp-fasi",
+  "name": "app-desktop",
   "version": "1.0.0",
   "description": "app desktop",
   "main": "main.js",
+  "homepage": "",
+  "author": {
+    "name": "DX Suporte - Danilo Xavier",
+    "email": "dxsuporteti@gmail.com",
+    "url": "https://dxsuporte.com.br"
+  },
+  "license": "MIT",
   "scripts": {
     "start": "electron .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "electron-builder",
+    "build-linux": "electron-builder --linux",
+    "build-win": "electron-builder --win"
   },
-  "keywords": [],
-  "author": "campillo",
-  "license": "ISC",
+  "build": {
+    "productName": "WebDesk Client",
+    "asar": false,
+    "linux": {
+      "icon": "./img/favicon.svg",
+      "target": [
+        "deb",
+        "tar.bz2"
+      ]
+    },
+    "win": {
+      "icon": "./img/favicon.ico",
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  },
   "prettier": {
     "trailingComma": "es5",
     "semi": false,
@@ -22,6 +46,7 @@
   },
   "devDependencies": {
     "electron": "^23.2.1",
+    "electron-builder": "^24.13.3",
     "prettier": "^3.2.5"
   },
   "dependencies": {
