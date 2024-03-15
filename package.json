@@ -17,17 +17,17 @@
     "build-win": "electron-builder --win"
   },
   "build": {
-    "productName": "WebDesk Client",
+    "productName": "APP DESKTOP",
     "asar": false,
     "linux": {
-      "icon": "./img/favicon.svg",
+      "icon": "./public/img/favicon.svg",
       "target": [
         "deb",
         "tar.bz2"
       ]
     },
     "win": {
-      "icon": "./img/favicon.ico",
+      "icon": "./public/img/favicon.ico",
       "target": [
         "nsis",
         "zip"
