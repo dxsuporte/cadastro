@@ -6,33 +6,36 @@ let win
 let winlogin
 function createWindow() {
   win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1024,
+    height: 768,
+    minWidth: 800,
+    minHeight: 600,
+    show: false,
+    autoHideMenuBar: true,
     webPreferences: {
-      // nodeIntegration: true,
-      // contextIsolation:true,
-      // devTools:false,
+      devTools: true,
       preload: Path.join(__dirname, 'view/index/index.js'),
     },
   })
   win.loadFile('view/index/index.html')
+  win.maximize()
+  win.show()
 }
 
 function loginWindow() {
   winlogin = new BrowserWindow({
-    width: 800,
-    height: 600,
+    minWidth: 900,
+    minHeight: 550,
+    autoHideMenuBar: true,
     webPreferences: {
-      // nodeIntegration: true,
-      // contextIsolation:true,
-      // devTools:false,
+      devTools: true,
       preload: Path.join(__dirname, 'view/login/login.js'),
     },
   })
   winlogin.loadFile('view/login/login.html')
 }
 
-app.whenReady().then(loginWindow)
+app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -71,45 +74,22 @@ function validatelogin(obj) {
   })
 }
 
-ipcMain.handle('get', () => {
-  getProducts()
-})
-
-ipcMain.handle('add', (event, obj) => {
-  addProduct(obj)
-})
-
-ipcMain.handle('get_one', (event, obj) => {
-  getproduct(obj)
-})
-
-ipcMain.handle('remove_product', (event, obj) => {
-  deleteproduct(obj)
-})
-
-ipcMain.handle('update', (event, obj) => {
-  updateproduct(obj)
-})
+ipcMain.handle('get', () => getProducts())
+ipcMain.handle('add', (event, obj) => addProduct(obj))
+ipcMain.handle('get_one', (event, obj) => getproduct(obj))
+ipcMain.handle('remove_product', (event, obj) => deleteproduct(obj))
+ipcMain.handle('update', (event, obj) => updateproduct(obj))
 
 function getProducts() {
   DataBase.all('SELECT * FROM product', (error, results, fields) => {
     if (error) {
       console.log(error)
     }
-
     win.webContents.send('products', results)
   })
 }
 
 function addProduct(obj) {
-  /* const sql = "INSERT INTO product SET ?";
-  DataBase.all(sql, obj, (error, results, fields) => {
-    if (error) {
-      console.log(error);
-    }
-    getProducts();
-  }); */
-
   DataBase.run('INSERT INTO product(name, price) VALUES(?, ?)', obj, (err) => {
     if (err) {
       return console.log(err.message)
@@ -136,7 +116,6 @@ function getproduct(obj) {
     if (error) {
       console.log(error)
     }
-    console.log(results)
     win.webContents.send('product', results[0])
   })
 }

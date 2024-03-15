@@ -8,8 +8,6 @@ let btnform
 let btnUpdate
 let btndelete
 let btnedit
-/*document.addEventListener("DOMContentLoaded", function() {
- })*/
 
 window.onload = function () {
   mylist = document.getElementById('mylist')
@@ -32,46 +30,24 @@ async function renderAddProduct() {
   name.value = ''
   price.value = ''
   await ipcRenderer.invoke('add', obj)
-
-  new Notification('Product', {
-    body: 'added Product',
-  })
 }
 
 ipcRenderer.on('products', (event, results) => {
   let template = ''
   const list = results
   list.forEach((element) => {
-    template += `
-         <tr>
-            <td>${element.name}</td>
+    template += `<tr>
+            <td>${element.name} ${element.id}</td>
             <td>${element.price}</td>
-            <td>
-              <button class="btn btn-danger"
-                value="${element.id}"
-                > 
-                delete
-              </button>
-             </td>
-             
-             <td>
-               <button class="btn btn-info"   
-                 id="btnedit"
-                 value="${element.id}"> 
-                edit
-              </button>
-           
-            </td>
-         </tr>
-      `
+            <td><button class="btn btn-danger" value="${element.id}">delete</button></td>
+            <td><button class="btn btn-info" id="btnedit" value="${element.id}">edit</button></td>
+         </tr>`
   })
-
   mylist.innerHTML = template
   btndelete = document.querySelectorAll('.btn-danger')
   btndelete.forEach((boton) => {
     boton.addEventListener('click', renderdeleteproduct)
   })
-
   btnedit = document.querySelectorAll('.btn-info')
   btnedit.forEach((boton) => {
     boton.addEventListener('click', rendergetproduct)
@@ -100,7 +76,6 @@ async function renderUpdateProduct() {
     name: name.value,
     price: price.value,
   }
-
   clearinput()
   await ipcRenderer.invoke('update', obj)
 }

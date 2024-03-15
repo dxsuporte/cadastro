@@ -12,13 +12,13 @@ function createTable(DataBase) {
   DataBase.exec(`
     CREATE TABLE user
     (
-      ID INTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       email   VARCHAR(255) NOT NULL,
       password   VARCHAR(255) NOT NULL
     );
     CREATE TABLE product
     (
-      ID INTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       name   VARCHAR(255) NOT NULL,
       price   INT(10) NOT NULL
     );
