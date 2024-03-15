@@ -10,8 +10,19 @@
   "keywords": [],
   "author": "campillo",
   "license": "ISC",
+  "prettier": {
+    "trailingComma": "es5",
+    "semi": false,
+    "singleQuote": true,
+    "useTabs": false,
+    "quoteProps": "consistent",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "printWidth": 100
+  },
   "devDependencies": {
-    "electron": "^23.2.1"
+    "electron": "^23.2.1",
+    "prettier": "^3.2.5"
   },
   "dependencies": {
     "sqlite3": "^5.1.7"

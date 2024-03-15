@@ -1,12 +1,12 @@
-const sqlite3 = require("sqlite3").verbose();
-const filepath = "./database/database.sql";
+const sqlite3 = require('sqlite3').verbose()
+const filepath = './database/database.sql'
 
 const DataBase = new sqlite3.Database(filepath, (error) => {
   if (error) {
-    return console.error(error.message);
+    return console.error(error.message)
   }
   //createTable(DataBase);
-});
+})
 
 function createTable(DataBase) {
   DataBase.exec(`
@@ -22,7 +22,7 @@ function createTable(DataBase) {
       name   VARCHAR(255) NOT NULL,
       price   INT(10) NOT NULL
     );
-  `);
+  `)
 }
 
-module.exports = DataBase;
+module.exports = DataBase

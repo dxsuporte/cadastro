@@ -1,46 +1,46 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = require('electron')
 
-let mylist;
-let idproduct;
-let name;
-let price;
-let btnform;
-let btnUpdate;
-let btndelete;
-let btnedit;
+let mylist
+let idproduct
+let name
+let price
+let btnform
+let btnUpdate
+let btndelete
+let btnedit
 /*document.addEventListener("DOMContentLoaded", function() {
  })*/
 
 window.onload = function () {
-  mylist = document.getElementById("mylist");
-  btnform = document.getElementById("btnform");
-  btnUpdate = document.getElementById("btnUpdate");
-  idproduct = document.getElementById("idproduct");
-  name = document.getElementById("name");
-  price = document.getElementById("price");
-  btnform.onclick = renderAddProduct;
-  btnUpdate.onclick = renderUpdateProduct;
-  renderGetProducts();
-};
+  mylist = document.getElementById('mylist')
+  btnform = document.getElementById('btnform')
+  btnUpdate = document.getElementById('btnUpdate')
+  idproduct = document.getElementById('idproduct')
+  name = document.getElementById('name')
+  price = document.getElementById('price')
+  btnform.onclick = renderAddProduct
+  btnUpdate.onclick = renderUpdateProduct
+  renderGetProducts()
+}
 
 async function renderGetProducts() {
-  await ipcRenderer.invoke("get");
+  await ipcRenderer.invoke('get')
 }
 
 async function renderAddProduct() {
-  const obj = [name.value, parseInt(price.value)];
-  name.value = "";
-  price.value = "";
-  await ipcRenderer.invoke("add", obj);
+  const obj = [name.value, parseInt(price.value)]
+  name.value = ''
+  price.value = ''
+  await ipcRenderer.invoke('add', obj)
 
-  new Notification("Product", {
-    body: "added Product",
-  });
+  new Notification('Product', {
+    body: 'added Product',
+  })
 }
 
-ipcRenderer.on("products", (event, results) => {
-  let template = "";
-  const list = results;
+ipcRenderer.on('products', (event, results) => {
+  let template = ''
+  const list = results
   list.forEach((element) => {
     template += `
          <tr>
@@ -63,50 +63,50 @@ ipcRenderer.on("products", (event, results) => {
            
             </td>
          </tr>
-      `;
-  });
+      `
+  })
 
-  mylist.innerHTML = template;
-  btndelete = document.querySelectorAll(".btn-danger");
+  mylist.innerHTML = template
+  btndelete = document.querySelectorAll('.btn-danger')
   btndelete.forEach((boton) => {
-    boton.addEventListener("click", renderdeleteproduct);
-  });
+    boton.addEventListener('click', renderdeleteproduct)
+  })
 
-  btnedit = document.querySelectorAll(".btn-info");
+  btnedit = document.querySelectorAll('.btn-info')
   btnedit.forEach((boton) => {
-    boton.addEventListener("click", rendergetproduct);
-  });
-});
+    boton.addEventListener('click', rendergetproduct)
+  })
+})
 
 async function renderdeleteproduct(e) {
-  const obj = { id: parseInt(e.target.value) };
-  await ipcRenderer.invoke("remove_product", obj);
+  const obj = { id: parseInt(e.target.value) }
+  await ipcRenderer.invoke('remove_product', obj)
 }
 
 async function rendergetproduct(e) {
-  const obj = { id: parseInt(e.target.value) };
-  await ipcRenderer.invoke("get_one", obj);
+  const obj = { id: parseInt(e.target.value) }
+  await ipcRenderer.invoke('get_one', obj)
 }
 
-ipcRenderer.on("product", (event, result) => {
-  idproduct.value = result.id;
-  name.value = result.name;
-  price.value = result.price;
-});
+ipcRenderer.on('product', (event, result) => {
+  idproduct.value = result.id
+  name.value = result.name
+  price.value = result.price
+})
 
 async function renderUpdateProduct() {
   const obj = {
     id: idproduct.value,
     name: name.value,
     price: price.value,
-  };
+  }
 
-  clearinput();
-  await ipcRenderer.invoke("update", obj);
+  clearinput()
+  await ipcRenderer.invoke('update', obj)
 }
 
 function clearinput() {
-  idproduct.value = "";
-  name.value = "";
-  price.value = "";
+  idproduct.value = ''
+  name.value = ''
+  price.value = ''
 }
