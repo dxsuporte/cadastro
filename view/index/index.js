@@ -1,28 +1,22 @@
+//Import
 const { ipcRenderer } = require('electron')
 
-let mylist, id, name, price, btnRegister, btnEdit, btnDelete
+//Variables
+let tbody, btnRegister, btnEdit, btnDelete
 
-window.onload = function () {
-  mylist = document.getElementById('mylist')
-  id = document.getElementById('idproduct')
-  name = document.getElementById('name')
-  price = document.getElementById('price')
-  btnRegister = document.getElementById('btnRegister')
-  btnRegister.onclick = createUpdate
-  index()
-}
-
-//Index
-async function index() {
+window.onload = async () => {
+  //Index
   await ipcRenderer.invoke('index')
-}
 
-//Index Response
-ipcRenderer.on('indexResponse', (event, results) => {
-  let template = ''
-  const list = results
-  list.forEach((element) => {
-    template += `<tr>
+  let id = document.getElementById('idproduct')
+  let name = document.getElementById('name')
+  let price = document.getElementById('price')
+
+  //Table
+  ipcRenderer.on('table', (event, obj) => {
+    tbody = document.getElementById('tbody')
+    obj.forEach((element) => {
+      tbody.innerHTML += `<tr>
             <td>${element.name}</td>
             <td>${element.price}</td>
             <td>
@@ -30,43 +24,50 @@ ipcRenderer.on('indexResponse', (event, results) => {
             <button class="btn btn-danger btnDelete" value="${element.id}">delete</button>
             </td>
          </tr>`
+    })
+    //Edit
+    btnEdit = document.querySelectorAll('.btnEdit')
+    btnEdit.forEach((boton) => {
+      boton.addEventListener('click', edit)
+    })
+    //Delete
+    btnDelete = document.querySelectorAll('.btnDelete')
+    btnDelete.forEach((boton) => {
+      boton.addEventListener('click', destroy)
+    })
   })
-  mylist.innerHTML = template
-  btnEdit = document.querySelectorAll('.btnEdit')
-  btnEdit.forEach((boton) => {
-    boton.addEventListener('click', edit)
-  })
-  btnDelete = document.querySelectorAll('.btnDelete')
-  btnDelete.forEach((boton) => {
-    boton.addEventListener('click', destroy)
-  })
-})
 
-async function createUpdate() {
-  let obj
-  if (!id.value) {
-    obj = [name.value, price.value]
-    await ipcRenderer.invoke('create', obj)
-  } else {
-    obj = [name.value, price.value, id.value]
-    await ipcRenderer.invoke('update', obj)
+  //Edit
+  async function edit(event) {
+    const obj = [event.target.value]
+    await ipcRenderer.invoke('edit', obj)
   }
-  window.location.reload(true)
-}
 
-async function edit(event) {
-  const obj = [event.target.value]
-  await ipcRenderer.invoke('edit', obj)
-}
+  ipcRenderer.on('editResponse', (event, result) => {
+    id.value = result.id
+    name.value = result.name
+    price.value = result.price
+  })
 
-ipcRenderer.on('editResponse', (event, result) => {
-  id.value = result.id
-  name.value = result.name
-  price.value = result.price
-})
+  //Delete
+  async function destroy(event) {
+    const obj = [event.target.value]
+    await ipcRenderer.invoke('destroy', obj)
+    window.location.reload(true)
+  }
 
-async function destroy(event) {
-  const obj = { id: parseInt(event.target.value) }
-  await ipcRenderer.invoke('destroy', obj)
-  window.location.reload(true)
+  //Register
+  btnRegister = document.getElementById('btnRegister')
+  btnRegister.onclick = createUpdate
+  async function createUpdate() {
+    let obj
+    if (!id.value) {
+      obj = [name.value, price.value]
+      await ipcRenderer.invoke('create', obj)
+    } else {
+      obj = [name.value, price.value, id.value]
+      await ipcRenderer.invoke('update', obj)
+    }
+    window.location.reload(true)
+  }
 }

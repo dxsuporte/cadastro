@@ -69,7 +69,7 @@ ipcMain.handle('login', (event, obj) => {
 ipcMain.handle('index', () => {
   DataBase.all('SELECT * FROM product', (error, results) => {
     if (error) console.log(error)
-    win.webContents.send('indexResponse', results)
+    win.webContents.send('table', results)
   })
 })
 
@@ -100,9 +100,8 @@ ipcMain.handle('update', (event, obj) => {
 
 //Destroy
 ipcMain.handle('destroy', (event, obj) => {
-  const { id } = obj
   const sql = 'DELETE FROM product WHERE id = ?'
-  DataBase.all(sql, id, (error, results, fields) => {
+  DataBase.all(sql, obj, (error, results, fields) => {
     if (error) console.log(error)
   })
 })
