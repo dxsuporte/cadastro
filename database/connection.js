@@ -2,7 +2,7 @@ const Path = require('path')
 const config = {
   client: 'sqlite3',
   connection: {
-    filename: Path.join(__dirname, '/database.sql'),
+    filename: Path.join(__dirname, '/database'),
   },
   useNullAsDefault: true,
   migrations: {
