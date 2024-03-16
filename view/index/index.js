@@ -1,37 +1,37 @@
 //Import
 const { ipcRenderer } = require('electron')
 
-//Variables
-let tbody, btnRegister, btnEdit, btnDelete
-
 window.onload = async () => {
   //Index
   await ipcRenderer.invoke('index')
 
-  let id = document.getElementById('idproduct')
+  //Imputs
+  let id = document.getElementById('idProduct')
   let name = document.getElementById('name')
   let surname = document.getElementById('surname')
 
   //Table
   ipcRenderer.on('table', async (event, obj) => {
-    tbody = document.getElementById('tbody')
+    let tbody = document.getElementById('tbody')
     await obj.forEach((event) => {
       tbody.innerHTML += `<tr>
             <td>${event.name}</td>
             <td>${event.surname}</td>
             <td>
-            <button class="btn btn-primary mr-1 btnEdit" value="${event.id}">edit</button>
-            <button class="btn btn-danger btnDelete" value="${event.id}">delete</button>
+            <div class="btn-group">
+            <button class="btn btn-primary btn-sm btnEdit" value="${event.id}"><i class="bi bi-pencil-fill"></i> Editar</button>
+            <button class="btn btn-danger btn-sm btnDelete" value="${event.id}"> <i class="bi bi-trash-fill"></i> Excluir</button>
+            </div>            
             </td>
          </tr>`
     })
     //Edit
-    btnEdit = document.querySelectorAll('.btnEdit')
+    let btnEdit = document.querySelectorAll('.btnEdit')
     btnEdit.forEach((boton) => {
       boton.addEventListener('click', edit)
     })
     //Delete
-    btnDelete = document.querySelectorAll('.btnDelete')
+    let btnDelete = document.querySelectorAll('.btnDelete')
     btnDelete.forEach((boton) => {
       boton.addEventListener('click', destroy)
     })
@@ -54,7 +54,7 @@ window.onload = async () => {
   }
 
   //Register
-  btnRegister = document.getElementById('btnRegister')
+  const btnRegister = document.getElementById('btnRegister')
   btnRegister.onclick = createUpdate
   async function createUpdate() {
     let obj

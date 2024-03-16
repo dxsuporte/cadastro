@@ -1,9 +1,9 @@
 const { app, BrowserWindow, ipcMain, Notification } = require('electron')
 const Path = require('path')
-const Sqlite3 = require('sqlite3').verbose()
 //Gerenciar Database via SQL
-const PureSQL = new Sqlite3.Database(Path.join(__dirname, 'database/database'))
-//Gerenciar Conexão Knex
+//////const Sqlite3 = require('sqlite3').verbose()
+//////const PureSQL = new Sqlite3.Database(Path.join(__dirname, 'database/database'))
+//Gerenciar Conexão KnexJS SQL
 const DataBase = require(Path.join(__dirname, 'database/connection'))
 //Verificar ou Criar Database
 const startDataBase = async () => {
@@ -81,12 +81,11 @@ ipcMain.handle('login', (event, obj) => {
 
 //Index
 ipcMain.handle('index', async () => {
-  PureSQL.all('SELECT * FROM registers', (error, results) => {
-    if (error) console.log(error)
-    win.webContents.send('table', results)
-  })
-  /* const result = await DataBase('registers').orderBy('id', 'desc')
-  await win.webContents.send('table', result) */
+  DataBase('registers')
+    .orderBy('id', 'desc')
+    .then(async (obj) => {
+      await win.webContents.send('table', obj)
+    })
 })
 
 //Edit
