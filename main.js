@@ -1,10 +1,24 @@
 const { app, BrowserWindow, ipcMain, Notification } = require('electron')
 const Path = require('path')
-const DataBase = require('./database/database')
+const Sqlite3 = require('sqlite3').verbose()
+//Gerenciar Database via SQL
+const PureSQL = new Sqlite3.Database(Path.join(__dirname, 'database/database.sql'))
+//Gerenciar Conexão Knex
+const DataBase = require(Path.join(__dirname, 'database/connection'))
+//Verificar ou Criar Database
+const startDataBase = async () => {
+  try {
+    await DataBase('dxdesk_migrations')
+  } catch (error) {
+    await DataBase.migrate.latest()
+    await DataBase('users').insert({ username: 'admin', password: 123456 })
+  }
+}
+startDataBase()
 
 let win
 let winlogin
-function createWindow() {
+const createWindow = () => {
   win = new BrowserWindow({
     width: 1024,
     height: 768,
@@ -66,42 +80,37 @@ ipcMain.handle('login', (event, obj) => {
 })
 
 //Index
-ipcMain.handle('index', () => {
-  DataBase.all('SELECT * FROM product', (error, results) => {
+ipcMain.handle('index', async () => {
+  PureSQL.all('SELECT * FROM registers', (error, results) => {
     if (error) console.log(error)
     win.webContents.send('table', results)
   })
+  /* const result = await DataBase('registers').orderBy('id', 'desc')
+  await win.webContents.send('table', result) */
 })
 
 //Edit
-ipcMain.handle('edit', (event, obj) => {
-  let sql = 'SELECT * FROM product WHERE id = ?'
-  DataBase.all(sql, obj, (error, results, fields) => {
-    if (error) console.log(error)
-    win.webContents.send('editResponse', results[0])
-  })
+ipcMain.handle('edit', async (event, obj) => {
+  const result = await DataBase('registers').where({ id: obj }).first()
+  await win.webContents.send('editResponse', result)
 })
 
 //Create
-ipcMain.handle('create', (event, obj) => {
-  const sql = 'INSERT INTO product(name, price) VALUES(?, ?)'
-  DataBase.run(sql, obj, (error) => {
-    if (error) console.log(error)
-  })
+ipcMain.handle('create', async (event, obj) => {
+  await DataBase('registers').insert({ ...obj })
+  await win.webContents.reload()
 })
 
 //Update
-ipcMain.handle('update', (event, obj) => {
-  const sql = 'UPDATE product SET name=?, price=? WHERE id=?'
-  DataBase.run(sql, obj, (error, results, fields) => {
-    if (error) console.log(error)
-  })
+ipcMain.handle('update', async (event, obj) => {
+  await DataBase('registers')
+    .update({ ...obj })
+    .where({ id: obj.id })
+  await win.webContents.reload()
 })
 
 //Destroy
-ipcMain.handle('destroy', (event, obj) => {
-  const sql = 'DELETE FROM product WHERE id = ?'
-  DataBase.all(sql, obj, (error, results, fields) => {
-    if (error) console.log(error)
-  })
+ipcMain.handle('destroy', async (event, obj) => {
+  await DataBase('registers').del().where({ id: obj })
+  await win.webContents.reload()
 })

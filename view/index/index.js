@@ -10,18 +10,18 @@ window.onload = async () => {
 
   let id = document.getElementById('idproduct')
   let name = document.getElementById('name')
-  let price = document.getElementById('price')
+  let surname = document.getElementById('surname')
 
   //Table
-  ipcRenderer.on('table', (event, obj) => {
+  ipcRenderer.on('table', async (event, obj) => {
     tbody = document.getElementById('tbody')
-    obj.forEach((element) => {
+    await obj.forEach((event) => {
       tbody.innerHTML += `<tr>
-            <td>${element.name}</td>
-            <td>${element.price}</td>
+            <td>${event.name}</td>
+            <td>${event.surname}</td>
             <td>
-            <button class="btn btn-primary mr-1 btnEdit" value="${element.id}">edit</button>
-            <button class="btn btn-danger btnDelete" value="${element.id}">delete</button>
+            <button class="btn btn-primary mr-1 btnEdit" value="${event.id}">edit</button>
+            <button class="btn btn-danger btnDelete" value="${event.id}">delete</button>
             </td>
          </tr>`
     })
@@ -39,21 +39,18 @@ window.onload = async () => {
 
   //Edit
   async function edit(event) {
-    const obj = [event.target.value]
-    await ipcRenderer.invoke('edit', obj)
+    await ipcRenderer.invoke('edit', event.target.value)
   }
 
   ipcRenderer.on('editResponse', (event, result) => {
     id.value = result.id
     name.value = result.name
-    price.value = result.price
+    surname.value = result.surname
   })
 
   //Delete
   async function destroy(event) {
-    const obj = [event.target.value]
-    await ipcRenderer.invoke('destroy', obj)
-    window.location.reload(true)
+    await ipcRenderer.invoke('destroy', event.target.value)
   }
 
   //Register
@@ -62,12 +59,11 @@ window.onload = async () => {
   async function createUpdate() {
     let obj
     if (!id.value) {
-      obj = [name.value, price.value]
+      obj = { name: name.value, surname: surname.value }
       await ipcRenderer.invoke('create', obj)
     } else {
-      obj = [name.value, price.value, id.value]
+      obj = { id: id.value, name: name.value, surname: surname.value }
       await ipcRenderer.invoke('update', obj)
     }
-    window.location.reload(true)
   }
 }
