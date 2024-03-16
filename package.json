@@ -42,7 +42,10 @@
     "quoteProps": "consistent",
     "bracketSpacing": true,
     "arrowParens": "always",
-    "printWidth": 100
+    "printWidth": 120,
+    "tabWidth": 2,
+    "endOfLine": "lf",
+    "jsxBracketSameLine": false
   },
   "devDependencies": {
     "electron": "^23.2.1",

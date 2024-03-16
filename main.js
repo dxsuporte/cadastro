@@ -49,84 +49,60 @@ app.on('activate', () => {
   }
 })
 
+//Login
 ipcMain.handle('login', (event, obj) => {
-  validatelogin(obj)
-})
-
-function validatelogin(obj) {
   const { email, password } = obj
   const sql = 'SELECT * FROM user WHERE email=? AND password=?'
   DataBase.all(sql, [email, password], (error, results, fields) => {
-    if (error) {
-      console.log(error)
-    }
-
+    if (error) console.log(error)
     if (results.length > 0) {
       createWindow()
       win.show()
       winlogin.close()
     } else {
-      new Notification({
-        title: 'login',
-        body: 'email o password equivocado',
-      }).show()
+      new Notification({ title: 'Login', body: 'E-mail ou senha inválidos' }).show()
     }
   })
-}
+})
 
-ipcMain.handle('get', () => getProducts())
-ipcMain.handle('add', (event, obj) => addProduct(obj))
-ipcMain.handle('get_one', (event, obj) => getproduct(obj))
-ipcMain.handle('remove_product', (event, obj) => deleteproduct(obj))
-ipcMain.handle('update', (event, obj) => updateproduct(obj))
-
-function getProducts() {
-  DataBase.all('SELECT * FROM product', (error, results, fields) => {
-    if (error) {
-      console.log(error)
-    }
-    win.webContents.send('products', results)
+//Index
+ipcMain.handle('index', () => {
+  DataBase.all('SELECT * FROM product', (error, results) => {
+    if (error) console.log(error)
+    win.webContents.send('indexResponse', results)
   })
-}
+})
 
-function addProduct(obj) {
-  DataBase.run('INSERT INTO product(name, price) VALUES(?, ?)', obj, (err) => {
-    if (err) {
-      return console.log(err.message)
-    }
-    getProducts()
+//Edit
+ipcMain.handle('edit', (event, obj) => {
+  let sql = 'SELECT * FROM product WHERE id = ?'
+  DataBase.all(sql, obj, (error, results, fields) => {
+    if (error) console.log(error)
+    win.webContents.send('editResponse', results[0])
   })
-}
+})
 
-function deleteproduct(obj) {
+//Create
+ipcMain.handle('create', (event, obj) => {
+  const sql = 'INSERT INTO product(name, price) VALUES(?, ?)'
+  DataBase.run(sql, obj, (error) => {
+    if (error) console.log(error)
+  })
+})
+
+//Update
+ipcMain.handle('update', (event, obj) => {
+  const sql = 'UPDATE product SET name=?, price=? WHERE id=?'
+  DataBase.run(sql, obj, (error, results, fields) => {
+    if (error) console.log(error)
+  })
+})
+
+//Destroy
+ipcMain.handle('destroy', (event, obj) => {
   const { id } = obj
   const sql = 'DELETE FROM product WHERE id = ?'
   DataBase.all(sql, id, (error, results, fields) => {
-    if (error) {
-      console.log(error)
-    }
-    getProducts()
+    if (error) console.log(error)
   })
-}
-
-function getproduct(obj) {
-  let { id } = obj
-  let sql = 'SELECT * FROM product WHERE id = ?'
-  DataBase.all(sql, id, (error, results, fields) => {
-    if (error) {
-      console.log(error)
-    }
-    win.webContents.send('product', results[0])
-  })
-}
-
-function updateproduct(obj) {
-  let { id, name, price } = obj
-  const sql = 'UPDATE product SET name=?, price=? WHERE id=?'
-  DataBase.all(sql, [name, price, id], (error, results, fields) => {
-    if (error) {
-      console.log(error)
-    }
-    getProducts()
-  })
-}
+})
