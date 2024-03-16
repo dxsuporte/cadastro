@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain, Notification } = require('electron')
 const Path = require('path')
 const Sqlite3 = require('sqlite3').verbose()
 //Gerenciar Database via SQL
-const PureSQL = new Sqlite3.Database(Path.join(__dirname, 'database/database.sql'))
+const PureSQL = new Sqlite3.Database(Path.join(__dirname, 'database/database'))
 //Gerenciar Conexão Knex
 const DataBase = require(Path.join(__dirname, 'database/connection'))
 //Verificar ou Criar Database
