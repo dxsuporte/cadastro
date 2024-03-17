@@ -1,1 +1,1 @@
-# electron-sql
+# crud-electron
