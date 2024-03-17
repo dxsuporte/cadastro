@@ -1,0 +1,48 @@
+/*-- # Start Html --*/
+html,
+body {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/*--------------------------------------
+  # Grid Template
+--------------------------------------*/
+
+.card {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.1fr 2.9fr 0.1fr;
+  grid-template-areas: 'card-header' 'card-body' 'card-footer';
+}
+
+.card-header {
+  grid-area: card-header;
+}
+
+.card-body {
+  grid-area: card-body;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+}
+
+.card-footer {
+  grid-area: card-footer;
+}
+
+.results tr[visible='false'] {
+  display: none;
+}
+
+.results tr[visible='true'] {
+  display: table-row;
+}

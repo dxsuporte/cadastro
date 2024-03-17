@@ -42,7 +42,7 @@
     "quoteProps": "consistent",
     "bracketSpacing": true,
     "arrowParens": "always",
-    "printWidth": 120
+    "printWidth": 180
   },
   "devDependencies": {
     "electron": "^23.2.1",

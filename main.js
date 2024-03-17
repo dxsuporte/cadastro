@@ -1,9 +1,9 @@
 //Modules for electron
-const { app, BrowserWindow, ipcMain, Notification } = require('electron')
+const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
 //File and directory
 const Path = require('path')
 //Ico Default
-const icon = nativeImage.createFromPath(Path.join(__dirname, 'img/favicon.png'))
+const icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
 //Gerenciar Conexão KnexJS SQL
 const DataBase = require(Path.join(__dirname, 'database/connection'))
 
@@ -42,8 +42,12 @@ const createWindow = () => {
 function loginWindow() {
   winlogin = new BrowserWindow({
     icon: icon,
-    minWidth: 900,
-    minHeight: 550,
+    width: 800,
+    height: 600,
+    maxWidth: 800,
+    maxHeight: 600,
+    minWidth: 800,
+    minHeight: 600,
     autoHideMenuBar: true,
     webPreferences: {
       devTools: true,
@@ -70,18 +74,19 @@ app.on('window-all-closed', () => {
 
 //Login
 ipcMain.handle('login', (event, obj) => {
-  const { email, password } = obj
-  const sql = 'SELECT * FROM user WHERE email=? AND password=?'
-  DataBase.all(sql, [email, password], (error, results, fields) => {
-    if (error) console.log(error)
-    if (results.length > 0) {
-      createWindow()
-      win.show()
-      winlogin.close()
-    } else {
-      new Notification({ title: 'Login', body: 'E-mail ou senha inválidos' }).show()
-    }
-  })
+  DataBase('users')
+    .where({ ...obj })
+    .first()
+    .then(async (result) => {
+      console.log(result)
+      if (result) {
+        createWindow()
+        win.show()
+        winlogin.close()
+      } else {
+        new Notification({ title: 'Erro', body: 'Usuário ou senha inválidos' }).show()
+      }
+    })
 })
 
 //Index
