@@ -13,7 +13,8 @@ const startDataBase = async () => {
     await DataBase('migrations')
   } catch (error) {
     await DataBase.migrate.latest()
-    await DataBase('users').insert({ username: 'admin', password: 123456 })
+    await DataBase('users').insert({ username: 'root', active: 1 })
+    await DataBase('users').insert({ username: 'admin' })
   }
 }
 startDataBase()
@@ -59,8 +60,8 @@ function loginWindow() {
 
 // Iniciar
 app.whenReady().then(() => {
-  //loginWindow()
-  createWindow()
+  loginWindow()
+  //createWindow()
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
@@ -79,8 +80,11 @@ ipcMain.handle('login', (event, obj) => {
     .where({ ...obj })
     .first()
     .then(async (result) => {
-      console.log(result)
       if (result) {
+        process.env.authUser = result.username
+        process.env.authActive = result.active
+        console.log(process.env.authUser)
+        console.log(process.env.authActive)
         createWindow()
         win.show()
         winlogin.close()
