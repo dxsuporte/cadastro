@@ -59,6 +59,7 @@ function loginWindow() {
 
 // Iniciar
 app.whenReady().then(() => {
+  //loginWindow()
   createWindow()
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()

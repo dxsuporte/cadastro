@@ -9,6 +9,8 @@ window.onload = async () => {
   let id = document.getElementById('idProduct')
   let name = document.getElementById('name')
   let surname = document.getElementById('surname')
+  //focus
+  document.getElementById('name').focus()
 
   //Table
   ipcRenderer.on('table', async (event, obj) => {
@@ -46,6 +48,10 @@ window.onload = async () => {
     id.value = result.id
     name.value = result.name
     surname.value = result.surname
+    //focus
+    document.getElementById('name').focus()
+    //ScrollTo Top
+    window.scrollTo(xCoord, yCoord)
   })
 
   //Delete

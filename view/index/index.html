@@ -22,27 +22,27 @@
     <!-- Start JS -->
     <script src="../../public/js/start.js"></script>
   </head>
-  <body class="bg-light text-dark">
+  <body id="body" class="bg-light text-dark">
     <div class="container-full m-3">
       <div class="form-group">
         <fieldset class="border rounded p-2">
           <legend class="w-auto h6"><i class="bi bi-pencil-square"></i> <b>Registro</b></legend>
-          <div class="form-row">
-            <input type="text" id="idProduct" hidden />
-            <div class="form-group col-sm-7 col-md-7 col-lg-7 col-xl-3">
-              <label for="name">Nome</label>
-              <input id="name" type="text" class="form-control form-control-sm focus" />
+          <form action="#">
+            <div class="form-row">
+              <input type="text" id="idProduct" hidden />
+              <div class="form-group col-sm-7 col-md-7 col-lg-7 col-xl-3">
+                <label for="name">Nome</label>
+                <input id="name" type="text" class="form-control form-control-sm" />
+              </div>
+              <div class="form-group">
+                <label for="surname">Sobrenome</label>
+                <input id="surname" type="text" class="form-control form-control-sm" />
+              </div>
+              <div class="form-group col-sm-2 col-md-2 d-flex align-items-end">
+                <button id="btnRegister" type="submit" class="btn btn-primary btn-sm mr-1"><i class="bi bi-check-circle-fill"></i> Salvar</button>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="surname">Sobrenome</label>
-              <input id="surname" type="text" class="form-control form-control-sm" />
-            </div>
-            <div class="form-group col-sm-2 col-md-2 d-flex align-items-end">
-              <button id="btnRegister" class="btn btn-primary btn-sm mr-1">
-                <i class="bi bi-check-circle-fill"></i> Salvar
-              </button>
-            </div>
-          </div>
+          </form>
         </fieldset>
       </div>
       <div class="form-group">
