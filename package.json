@@ -23,13 +23,13 @@
     "asar": false,
     "buildDependenciesFromSource": true,
     "win": {
-      "icon": "./public/favicon.ico",
+      "icon": "./public/img/favicon.ico",
       "target": [
         "zip"
       ]
     },
     "linux": {
-      "icon": ".public/favicon.svg",
+      "icon": "./public/img/favicon.svg",
       "category": "Development",
       "target": [
         {
