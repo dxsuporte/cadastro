@@ -1,7 +1,7 @@
 {
-  "name": "app-desktop",
+  "name": "crud-electron",
   "version": "1.0.0",
-  "description": "app desktop",
+  "description": "Basic registration",
   "main": "main.js",
   "homepage": "",
   "author": {
@@ -17,7 +17,7 @@
     "build-win": "electron-builder --win"
   },
   "build": {
-    "productName": "APP DESKTOP",
+    "productName": "Cadastro básico",
     "asar": false,
     "linux": {
       "icon": "./public/img/favicon.svg",
@@ -42,10 +42,7 @@
     "quoteProps": "consistent",
     "bracketSpacing": true,
     "arrowParens": "always",
-    "printWidth": 120,
-    "tabWidth": 2,
-    "endOfLine": "lf",
-    "jsxBracketSameLine": false
+    "printWidth": 120
   },
   "devDependencies": {
     "electron": "^23.2.1",

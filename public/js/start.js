@@ -3,12 +3,8 @@ $(document).ready(() => {
   /* Inicio Funções*/
 
   /*--------------------------------------------------------------
-  # Title DropDown
+  # Search Table
   --------------------------------------------------------------*/
-  $(() => {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-
   $('.search').keyup(() => {
     const searchSplit = $('.search').val().replace(/ /g, "'):containsi('")
     $.extend($.expr[':'], {

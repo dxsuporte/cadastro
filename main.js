@@ -1,14 +1,16 @@
+//Modules for electron
 const { app, BrowserWindow, ipcMain, Notification } = require('electron')
+//File and directory
 const Path = require('path')
-//Gerenciar Database via SQL
-//////const Sqlite3 = require('sqlite3').verbose()
-//////const PureSQL = new Sqlite3.Database(Path.join(__dirname, 'database/database'))
+//Ico Default
+const icon = nativeImage.createFromPath(Path.join(__dirname, 'img/favicon.png'))
 //Gerenciar Conexão KnexJS SQL
 const DataBase = require(Path.join(__dirname, 'database/connection'))
+
 //Verificar ou Criar Database
 const startDataBase = async () => {
   try {
-    await DataBase('dxdesk_migrations')
+    await DataBase('migrations')
   } catch (error) {
     await DataBase.migrate.latest()
     await DataBase('users').insert({ username: 'admin', password: 123456 })
@@ -20,6 +22,7 @@ let win
 let winlogin
 const createWindow = () => {
   win = new BrowserWindow({
+    icon: icon,
     width: 1024,
     height: 768,
     minWidth: 800,
@@ -38,6 +41,7 @@ const createWindow = () => {
 
 function loginWindow() {
   winlogin = new BrowserWindow({
+    icon: icon,
     minWidth: 900,
     minHeight: 550,
     autoHideMenuBar: true,
@@ -49,17 +53,18 @@ function loginWindow() {
   winlogin.loadFile('view/login/login.html')
 }
 
-app.whenReady().then(createWindow)
+// Iniciar
+app.whenReady().then(() => {
+  createWindow()
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  })
+})
 
+//Fechar
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
-  }
-})
-
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
   }
 })
 
