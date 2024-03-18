@@ -25,8 +25,7 @@ const startDataBase = async () => {
 }
 startDataBase()
 
-let win
-let winlogin
+let win, winLogin
 const createWindow = () => {
   win = new BrowserWindow({
     icon: Icon,
@@ -47,12 +46,12 @@ const createWindow = () => {
 }
 
 function loginWindow() {
-  winlogin = new BrowserWindow({
+  winLogin = new BrowserWindow({
     icon: Icon,
     width: 800,
-    height: 600,
+    height: 768,
     maxWidth: 800,
-    maxHeight: 600,
+    maxHeight: 768,
     minWidth: 800,
     minHeight: 600,
     autoHideMenuBar: true,
@@ -61,7 +60,7 @@ function loginWindow() {
       preload: Path.join(__dirname, 'view/login/login.js'),
     },
   })
-  winlogin.loadFile('view/login/login.html')
+  winLogin.loadFile('view/login/login.html')
 }
 
 // Iniciar
@@ -92,7 +91,7 @@ ipcMain.handle('login', async (event, obj) => {
         process.env.authActive = result.active
         createWindow()
         await win.show()
-        await winlogin.close()
+        await winLogin.close()
       } else {
         new Notification({ title: 'Erro', body: 'Usuário ou senha inválidos' }).show()
       }
