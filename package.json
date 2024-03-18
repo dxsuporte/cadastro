@@ -1,8 +1,10 @@
 {
   "name": "crud-electron",
-  "productName": "Cadastro básico",
+  "productName": "Cadastro",
   "version": "1.0.0",
   "description": "Basic registration",
+  "license": "MIT",
+  "repository": "https://github.com/dxsuporte/crud-electron",
   "main": "main.js",
   "homepage": "",
   "author": {
@@ -10,18 +12,20 @@
     "email": "dxsuporteti@gmail.com",
     "url": "https://dxsuporte.com.br"
   },
-  "license": "MIT",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
     "build-linux": "electron-builder --linux",
-    "build-win": "electron-builder --win"
+    "build-win": "electron-builder --win",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
     "appId": "com.dxsuporte.${name}",
     "artifactName": "${productName}-${version}-${os}_${arch}.${ext}",
     "asar": false,
     "buildDependenciesFromSource": true,
+    "asarUnpack": "**\\*.{node,dll}",
     "win": {
       "icon": "./public/img/favicon.ico",
       "target": [
@@ -58,12 +62,13 @@
     "printWidth": 180
   },
   "devDependencies": {
+    "@electron/rebuild": "^3.6.0",
     "electron": "^23.2.1",
     "electron-builder": "^24.13.3",
     "prettier": "^3.2.5"
   },
   "dependencies": {
-    "knex": "^3.1.0",
-    "sqlite3": "^5.1.7"
+    "better-sqlite3": "^9.4.3",
+    "knex": "^3.1.0"
   }
 }

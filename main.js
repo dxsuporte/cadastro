@@ -83,8 +83,6 @@ ipcMain.handle('login', (event, obj) => {
       if (result) {
         process.env.authUser = result.username
         process.env.authActive = result.active
-        console.log(process.env.authUser)
-        console.log(process.env.authActive)
         createWindow()
         win.show()
         winlogin.close()
@@ -96,11 +94,8 @@ ipcMain.handle('login', (event, obj) => {
 
 //Index
 ipcMain.handle('index', async () => {
-  DataBase('registers')
-    .orderBy('id', 'desc')
-    .then(async (obj) => {
-      await win.webContents.send('table', obj)
-    })
+  const result = await DataBase('registers').orderBy('id', 'desc')
+  await win.webContents.send('table', result)
 })
 
 //Edit

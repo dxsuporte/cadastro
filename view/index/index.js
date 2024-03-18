@@ -2,8 +2,11 @@
 const { ipcRenderer } = require('electron')
 
 window.onload = async () => {
+  const loadTable = async () => {
+    await ipcRenderer.invoke('index')
+  }
+  setTimeout(loadTable, 500)
   //Index
-  await ipcRenderer.invoke('index')
 
   //Imputs
   let id = document.getElementById('idProduct')
@@ -17,6 +20,7 @@ window.onload = async () => {
 
   //Table
   ipcRenderer.on('table', async (event, obj) => {
+    console.log(obj)
     let tbody = document.getElementById('tbody')
     await obj.forEach((event) => {
       tbody.innerHTML += `<tr>

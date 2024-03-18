@@ -1,6 +1,6 @@
 const Path = require('path')
 const config = {
-  client: 'sqlite3',
+  client: 'better-sqlite3',
   connection: {
     filename: Path.join(__dirname, '/database'),
   },
