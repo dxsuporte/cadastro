@@ -2,11 +2,11 @@
 const { ipcRenderer } = require('electron')
 
 window.onload = async () => {
+  //Index
   const loadTable = async () => {
     await ipcRenderer.invoke('index')
   }
-  setTimeout(loadTable, 500)
-  //Index
+  setTimeout(loadTable, 100)
 
   //Imputs
   let id = document.getElementById('idProduct')
@@ -29,7 +29,7 @@ window.onload = async () => {
       <td value="${event.id}">${event.description}</td>
       <td value="${event.id}">${event.note}</td>
       <td value="${event.id}">${event.phone}</td>
-      ${process.env.authActive != '1' ? '' : `<td><button class="btn btn-danger btn-sm btn-block btnDelete" value="${event.id}"> <i class="bi bi-trash-fill"></i></button></td>`}
+      ${process.env.authActive != '1' ? '' : `<th><button class="btn btn-danger btn-sm btn-block btnDelete" value="${event.id}"> <i class="bi bi-trash-fill"></i></button></th>`}
       </tr>`
     })
     //Edit

@@ -1,9 +1,13 @@
 //Modules for electron
 const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
+//Password Crypto
+const { createHmac } = require('node:crypto')
+//Secret Crypto
+process.env.appKey = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 //File and directory
 const Path = require('path')
 //Ico Default
-const icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
+const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
 //Gerenciar Conexão KnexJS SQL
 const DataBase = require(Path.join(__dirname, 'database/connection'))
 
@@ -14,7 +18,9 @@ const startDataBase = async () => {
   } catch (error) {
     await DataBase.migrate.latest()
     await DataBase('users').insert({ username: 'root', active: 1 })
-    await DataBase('users').insert({ username: 'admin' })
+    await DataBase('users').insert({ username: 'admin', active: 1 })
+    const passwordHash = createHmac('sha256', process.env.appKey).update('123456').digest('hex')
+    await DataBase('users').insert({ username: 'user', password: passwordHash })
   }
 }
 startDataBase()
@@ -23,7 +29,7 @@ let win
 let winlogin
 const createWindow = () => {
   win = new BrowserWindow({
-    icon: icon,
+    icon: Icon,
     width: 1024,
     height: 768,
     minWidth: 800,
@@ -42,7 +48,7 @@ const createWindow = () => {
 
 function loginWindow() {
   winlogin = new BrowserWindow({
-    icon: icon,
+    icon: Icon,
     width: 800,
     height: 600,
     maxWidth: 800,
@@ -75,17 +81,18 @@ app.on('window-all-closed', () => {
 })
 
 //Login
-ipcMain.handle('login', (event, obj) => {
-  DataBase('users')
-    .where({ ...obj })
+ipcMain.handle('login', async (event, obj) => {
+  const passwordHash = createHmac('sha256', process.env.appKey).update(obj.password).digest('hex')
+  await DataBase('users')
+    .where({ username: obj.username, password: passwordHash })
     .first()
     .then(async (result) => {
       if (result) {
         process.env.authUser = result.username
         process.env.authActive = result.active
         createWindow()
-        win.show()
-        winlogin.close()
+        await win.show()
+        await winlogin.close()
       } else {
         new Notification({ title: 'Erro', body: 'Usuário ou senha inválidos' }).show()
       }
