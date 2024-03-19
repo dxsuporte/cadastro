@@ -1,8 +1,9 @@
 const Path = require('path')
+
 const config = {
   client: 'better-sqlite3',
   connection: {
-    filename: Path.join(__dirname, '/database'),
+    filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database' : '/database'),
   },
   useNullAsDefault: true,
   migrations: {

@@ -23,7 +23,7 @@
   "build": {
     "appId": "com.dxsuporte.${name}",
     "artifactName": "${productName}-${version}-${os}_${arch}.${ext}",
-    "asar": false,
+    "asar": true,
     "buildDependenciesFromSource": true,
     "asarUnpack": "**\\*.{node,dll}",
     "win": {
