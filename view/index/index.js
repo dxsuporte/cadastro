@@ -15,6 +15,7 @@ window.onload = async () => {
   let description = document.getElementById('description')
   let note = document.getElementById('note')
   let phone = document.getElementById('phone')
+  let obs = document.getElementById('obs')
   //focus
   document.getElementById('name').focus()
 
@@ -24,11 +25,11 @@ window.onload = async () => {
     let tbody = document.getElementById('tbody')
     await obj.forEach((event) => {
       tbody.innerHTML += `<tr>
-      <td value="${event.id}">${event.name}</td>
-      <td value="${event.id}">${event.surname}</td>
-      <td value="${event.id}">${event.description}</td>
-      <td value="${event.id}">${event.note}</td>
-      <td value="${event.id}">${event.phone}</td>
+      <td value="${event.id}">${event.description || ''}<div class="text-danger"><small>${event.obs || ''}</small></div></td>
+      <td value="${event.id}">${event.note || ''}</td>
+      <td value="${event.id}">${event.name || ''}</td>
+      <td value="${event.id}">${event.surname || ''}</td>
+      <td value="${event.id}">${event.phone || ''}</td>
       ${process.env.authActive != '1' ? '' : `<th><button class="btn btn-danger btn-sm btn-block btnDelete" value="${event.id}"> <i class="bi bi-trash-fill"></i></button></th>`}
       </tr>`
     })
@@ -53,6 +54,7 @@ window.onload = async () => {
     description.value = result.description
     note.value = result.note
     phone.value = result.phone
+    obs.value = result.obs
     //focus
     document.getElementById('name').focus()
     //ScrollTo Top
@@ -76,6 +78,7 @@ window.onload = async () => {
         description: description.value,
         note: note.value,
         phone: phone.value,
+        obs: obs.value,
       }
       await ipcRenderer.invoke('create', obj)
     } else {
@@ -86,6 +89,7 @@ window.onload = async () => {
         description: description.value,
         note: note.value,
         phone: phone.value,
+        obs: obs.value,
       }
       await ipcRenderer.invoke('update', obj)
     }

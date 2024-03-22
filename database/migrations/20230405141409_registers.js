@@ -6,6 +6,7 @@ exports.up = function (knex) {
     table.string('description', 255).notNullable()
     table.string('note', 255).notNullable()
     table.string('phone', 255).notNullable()
+    table.string('obs', 255)
   })
 }
 

@@ -31,14 +31,6 @@
             <div class="form-row">
               <input type="text" id="idProduct" hidden />
               <div class="form-group col-md-6 col-lg-4 col-xl-3">
-                <label for="name">Nome</label>
-                <input id="name" type="text" class="form-control form-control-sm" />
-              </div>
-              <div class="form-group col-md-6 col-lg-4 col-xl-3">
-                <label for="surname">Andar</label>
-                <input id="surname" type="text" class="form-control form-control-sm" />
-              </div>
-              <div class="form-group col-md-6 col-lg-4 col-xl-3">
                 <label for="description">Especialidade</label>
                 <input id="description" type="text" class="form-control form-control-sm" />
               </div>
@@ -47,8 +39,20 @@
                 <input id="note" type="text" class="form-control form-control-sm" />
               </div>
               <div class="form-group col-md-6 col-lg-4 col-xl-3">
+                <label for="name">Nome</label>
+                <input id="name" type="text" class="form-control form-control-sm" />
+              </div>
+              <div class="form-group col-md-6 col-lg-4 col-xl-3">
+                <label for="surname">Andar</label>
+                <input id="surname" type="text" class="form-control form-control-sm" />
+              </div>
+              <div class="form-group col-md-6 col-lg-4 col-xl-3">
                 <label for="phone">Telefone</label>
                 <input id="phone" type="text" class="form-control form-control-sm" />
+              </div>
+              <div class="form-group col-md-6 col-lg-4 col-xl-3">
+                <label for="obs">Observação</label>
+                <input id="obs" type="text" class="form-control form-control-sm" />
               </div>
               <div class="form-group col-sm-2 col-md-2 d-flex align-items-end">
                 <button id="btnRegister" type="submit" class="btn btn-primary btn-sm mr-1"><i class="bi bi-check-circle-fill"></i> Salvar</button>
@@ -77,10 +81,10 @@
             <table class="table table-hover table-bordered table-sm text-center results">
               <thead class="thead-light">
                 <tr>
-                  <th scope="col">Nome</th>
-                  <th scope="col">Andar</th>
                   <th scope="col">Especialidade</th>
                   <th scope="col">Atuação</th>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Andar</th>
                   <th scope="col">Telefone</th>
                   <th id="thDelete" class="col-1">Excluir</th>
                 </tr>
