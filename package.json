@@ -18,8 +18,8 @@
     "build-linux": "electron-builder --linux",
     "build-win": "electron-builder --win",
     "rebuild": "electron-rebuild -f -w better-sqlite3",
-    "compile-linux": "electron-packager . budget --platform=linux --arch=x64 --asar=false --prune=false --overwrite --out=build/ --icon=./public/img/favicon.png",
-    "compile-win": "electron-packager . budget --platform=win32 --arch=x64 --asar=false --prune=false --overwrite --out=build/ --icon=./public/img/favicon.ico --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"budget\"",
+    "packager-linux": "electron-packager . cadastro --platform=linux --arch=x64 --asar=true --prune=false --overwrite --out=build/ --icon=./public/img/favicon.png",
+    "packager-win": "electron-packager . cadastro --platform=win32 --arch=x64 --asar=true --prune=false --overwrite --out=build/ --icon=./public/img/favicon.ico --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"cadastro\"",
     "postinstall": "electron-builder install-app-deps"
   },
   "build": {
