@@ -18,9 +18,10 @@ const startDataBase = async () => {
   } catch (error) {
     await DataBase.migrate.latest()
     await DataBase('users').insert({ username: 'root', active: 1 })
-    await DataBase('users').insert({ username: 'admin', active: 1 })
-    const passwordHash = createHmac('sha256', process.env.appKey).update('123456').digest('hex')
-    await DataBase('users').insert({ username: 'user', password: passwordHash })
+    const passwdAdm = createHmac('sha256', process.env.appKey).update('Admin@123').digest('hex')
+    await DataBase('users').insert({ username: 'admin', password: passwdAdm, active: 1 })
+    const passwdUser = createHmac('sha256', process.env.appKey).update('123456').digest('hex')
+    await DataBase('users').insert({ username: 'user', password: passwdUser })
   }
 }
 startDataBase()
