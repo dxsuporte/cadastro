@@ -22,7 +22,7 @@
     "rebuild": "electron-rebuild -f -w better-sqlite3"
   },
   "build": {
-    "appId": "com.dxsuporte.${name}",
+    "appId": "com.dxsuporte.crud-electron",
     "artifactName": "${productName}-${version}-${os}_${arch}.${ext}",
     "asar": true,
     "buildDependenciesFromSource": true,
