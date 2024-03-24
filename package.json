@@ -35,7 +35,6 @@
     },
     "linux": {
       "icon": "./public/img/favicon.svg",
-      "category": "Development",
       "target": [
         {
           "target": "deb",
