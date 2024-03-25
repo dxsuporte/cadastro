@@ -26,8 +26,9 @@ const startDataBase = async () => {
 }
 startDataBase()
 
-let win, winLogin
-const createWindow = async () => {
+//Janela Index
+let win
+const createIndex = async () => {
   win = new BrowserWindow({
     icon: Icon,
     width: 1024,
@@ -46,6 +47,8 @@ const createWindow = async () => {
   win.show()
 }
 
+//Janela Login
+let winLogin
 const loginWindow = async () => {
   winLogin = new BrowserWindow({
     icon: Icon,
@@ -67,21 +70,19 @@ const loginWindow = async () => {
 // Iniciar
 app.whenReady().then(async () => {
   await loginWindow()
-  //createWindow()
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  //await createIndex()
+  app.on('activate', async () => {
+    if (BrowserWindow.getAllWindows().length === 0) await createIndex()
   })
 })
 
 //Fechar
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  if (process.platform !== 'darwin') app.quit()
 })
 
 //Login
-ipcMain.handle('login', async (event, obj) => {
+ipcMain.handle('login', async (_, obj) => {
   const passwordHash = createHmac('sha256', process.env.appKey).update(obj.password).digest('hex')
   await DataBase('users')
     .where({ username: obj.username, password: passwordHash })
@@ -90,7 +91,7 @@ ipcMain.handle('login', async (event, obj) => {
       if (result) {
         process.env.authUser = result.username
         process.env.authActive = result.active
-        await createWindow()
+        await createIndex()
         await win.show()
         await winLogin.close()
       } else {
