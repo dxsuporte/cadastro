@@ -17,37 +17,36 @@ window.onload = async () => {
   let phone = document.getElementById('phone')
   let obs = document.getElementById('obs')
   //focus
-  document.getElementById('name').focus()
+  document.getElementById('description').focus()
 
   //Table
-  ipcRenderer.on('table', async (event, obj) => {
-    console.log(obj)
+  ipcRenderer.on('table', async (_, obj) => {
     let tbody = document.getElementById('tbody')
-    await obj.forEach((event) => {
+    await obj.forEach((result) => {
       tbody.innerHTML += `<tr>
-      <td value="${event.id}">${event.description || ''}<div class="text-danger"><small>${event.obs || ''}</small></div></td>
-      <td value="${event.id}">${event.note || ''}</td>
-      <td value="${event.id}">${event.name || ''}</td>
-      <td value="${event.id}">${event.surname || ''}</td>
-      <td value="${event.id}">${event.phone || ''}</td>
-      ${process.env.authActive != '1' ? '' : `<th><button class="btn btn-danger btn-sm btn-block btnDelete" value="${event.id}"> <i class="bi bi-trash-fill"></i></button></th>`}
+      <td value="${result.id}">${result.description || ''}<div class="text-danger"><small>${result.obs || ''}</small></div></td>
+      <td value="${result.id}">${result.note || ''}</td>
+      <td value="${result.id}">${result.name || ''}</td>
+      <td value="${result.id}">${result.surname || ''}</td>
+      <td value="${result.id}">${result.phone || ''}</td>
+      ${process.env.authActive != '1' ? '' : `<th><button class="btn btn-danger btn-sm btn-block btnDelete" value="${result.id}"> <i class="bi bi-trash-fill"></i></button></th>`}
       </tr>`
     })
     //Edit
-    document.querySelectorAll('#tbody td').forEach((event) => {
-      event.addEventListener('click', edit)
+    document.querySelectorAll('#tbody td').forEach((obj) => {
+      obj.addEventListener('click', edit)
     })
     //Delete
-    document.querySelectorAll('.btnDelete').forEach((boton) => {
-      boton.addEventListener('click', destroy)
+    document.querySelectorAll('.btnDelete').forEach((obj) => {
+      obj.addEventListener('click', destroy)
     })
   })
 
   //Edit
-  async function edit(event) {
-    await ipcRenderer.invoke('edit', event.target.getAttribute('value'))
+  async function edit(obj) {
+    await ipcRenderer.invoke('edit', obj.target.getAttribute('value'))
   }
-  ipcRenderer.on('editResponse', (event, result) => {
+  ipcRenderer.on('editResponse', (_, result) => {
     id.value = result.id
     name.value = result.name
     surname.value = result.surname
@@ -56,14 +55,14 @@ window.onload = async () => {
     phone.value = result.phone
     obs.value = result.obs
     //focus
-    document.getElementById('name').focus()
+    document.getElementById('description').focus()
     //ScrollTo Top
     window.scrollTo(xCoord, yCoord)
   })
 
   //Delete
-  async function destroy(event) {
-    await ipcRenderer.invoke('destroy', event.target.value)
+  async function destroy(obj) {
+    await ipcRenderer.invoke('destroy', obj.target.value)
   }
 
   //Register

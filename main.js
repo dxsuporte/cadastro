@@ -92,19 +92,19 @@ ipcMain.handle('index', async () => {
 })
 
 //Edit
-ipcMain.handle('edit', async (event, obj) => {
+ipcMain.handle('edit', async (_, obj) => {
   const result = await DataBase('registers').where({ id: obj }).first()
   await win.webContents.send('editResponse', result)
 })
 
 //Create
-ipcMain.handle('create', async (event, obj) => {
+ipcMain.handle('create', async (_, obj) => {
   await DataBase('registers').insert({ ...obj })
   await win.webContents.reload()
 })
 
 //Update
-ipcMain.handle('update', async (event, obj) => {
+ipcMain.handle('update', async (_, obj) => {
   await DataBase('registers')
     .update({ ...obj })
     .where({ id: obj.id })
@@ -112,7 +112,7 @@ ipcMain.handle('update', async (event, obj) => {
 })
 
 //Destroy
-ipcMain.handle('destroy', async (event, obj) => {
+ipcMain.handle('destroy', async (_, obj) => {
   await DataBase('registers').del().where({ id: obj })
   await win.webContents.reload()
 })
