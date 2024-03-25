@@ -68,9 +68,9 @@ app.on('window-all-closed', () => {
 
 //Login
 ipcMain.handle('login', async (_, obj) => {
-  const passwordHash = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
+  const password = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
   await DataBase('users')
-    .where({ username: obj.username, password: passwordHash })
+    .where({ username: obj.username, password: password })
     .first()
     .then(async (result) => {
       if (result) {
