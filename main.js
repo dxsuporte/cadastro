@@ -3,7 +3,7 @@ const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('elec
 //Password Crypto
 const { createHmac } = require('node:crypto')
 //Secret Crypto
-process.env.appKey = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
+process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 //File and directory
 const Path = require('path')
 //Ico Default
@@ -68,7 +68,7 @@ app.on('window-all-closed', () => {
 
 //Login
 ipcMain.handle('login', async (_, obj) => {
-  const passwordHash = createHmac('sha256', process.env.appKey).update(obj.password).digest('hex')
+  const passwordHash = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
   await DataBase('users')
     .where({ username: obj.username, password: passwordHash })
     .first()
