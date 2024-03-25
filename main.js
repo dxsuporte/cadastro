@@ -27,7 +27,7 @@ const startDataBase = async () => {
 startDataBase()
 
 let win, winLogin
-const createWindow = () => {
+const createWindow = async () => {
   win = new BrowserWindow({
     icon: Icon,
     width: 1024,
@@ -41,12 +41,12 @@ const createWindow = () => {
       preload: Path.join(__dirname, 'view/index/index.js'),
     },
   })
-  win.loadFile('view/index/index.html')
+  await win.loadFile(Path.join(__dirname, 'view/index/index.html'))
   win.maximize()
   win.show()
 }
 
-function loginWindow() {
+const loginWindow = async () => {
   winLogin = new BrowserWindow({
     icon: Icon,
     width: 800,
@@ -61,12 +61,12 @@ function loginWindow() {
       preload: Path.join(__dirname, 'view/login/login.js'),
     },
   })
-  winLogin.loadFile('view/login/login.html')
+  await winLogin.loadFile(Path.join(__dirname, 'view/login/login.html'))
 }
 
 // Iniciar
-app.whenReady().then(() => {
-  loginWindow()
+app.whenReady().then(async () => {
+  await loginWindow()
   //createWindow()
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -90,7 +90,7 @@ ipcMain.handle('login', async (event, obj) => {
       if (result) {
         process.env.authUser = result.username
         process.env.authActive = result.active
-        createWindow()
+        await createWindow()
         await win.show()
         await winLogin.close()
       } else {
