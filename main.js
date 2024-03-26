@@ -9,6 +9,8 @@ const { createHmac } = require('node:crypto')
 //Gerenciar View EJS
 const ElectronEjs = require('electron-ejs')
 new ElectronEjs({ TITLE: 'Cadastro básico' }, {})
+//File Default
+process.env.BASE_URL = Path.join(__dirname)
 //Secret Crypto
 process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 //Gerenciar Conexão KnexJS SQL

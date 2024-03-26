@@ -10,16 +10,16 @@
     <meta name="keywords" content="nodejs, electronjs, bootstrap" />
     <title><%- TITLE %></title>
     <!-- Favicons -->
-    <link href="../../public/img/favicon.svg" rel="icon" />
+    <link href="<%- process.env.BASE_URL %>/public/img/favicon.svg" rel="icon" />
     <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="../../public/vendor/bootstrap/css/bootstrap.css" />
+    <link href="<%- process.env.BASE_URL %>/public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Icon -->
-    <link rel="stylesheet" type="text/css" href="../../public/vendor/bootstrap/css/bootstrap-icons.css" />
+    <link href="<%- process.env.BASE_URL %>/public/vendor/bootstrap/css/bootstrap-icons.css" rel="stylesheet" type="text/css" />
     <!-- Start CSS -->
-    <link rel="stylesheet" href="../../public/css/start.css" />
+    <link href="<%- process.env.BASE_URL %>/public/css/start.css" rel="stylesheet" type="text/css" />
     <!--jquery -->
-    <script src="../../public/vendor/jquery/jquery.min.js"></script>
+    <script src="<%- process.env.BASE_URL %>/public/vendor/jquery/jquery.min.js"></script>
     <!-- Start JS -->
-    <script src="../../public/js/start.js"></script>
+    <script src="<%- process.env.BASE_URL %>/public/js/start.js"></script>
   </head>
   <body id="body" class="bg-light text-dark">
