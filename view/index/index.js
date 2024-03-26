@@ -19,27 +19,20 @@ window.onload = async () => {
 
   //Create, Update
   document.getElementById('createUpdate').onclick = async () => {
-    if (!id.value) {
-      const create = {
-        name: name.value,
-        surname: surname.value,
-        description: description.value,
-        note: note.value,
-        phone: phone.value,
-        obs: obs.value,
-      }
-      await ipcRenderer.invoke('create', create)
+    const data = {
+      id: id.value,
+      name: name.value,
+      surname: surname.value,
+      description: description.value,
+      note: note.value,
+      phone: phone.value,
+      obs: obs.value,
+    }
+    if (!data.id) {
+      delete data.id
+      await ipcRenderer.invoke('create', data)
     } else {
-      const update = {
-        id: id.value,
-        name: name.value,
-        surname: surname.value,
-        description: description.value,
-        note: note.value,
-        phone: phone.value,
-        obs: obs.value,
-      }
-      await ipcRenderer.invoke('update', update)
+      await ipcRenderer.invoke('update', data)
     }
   }
 
