@@ -15,41 +15,7 @@
   "scripts": {
     "start": "electron .",
     "packager-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=./public/img/favicon.png --prune=false --out=build/",
-    "packager-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=./public/img/favicon.ico --prune=false --out=build/ --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"cadastro\"",
-    "build": "electron-builder",
-    "build-linux": "electron-builder --linux",
-    "build-win": "electron-builder --win",
-    "rebuild": "electron-rebuild -f -w better-sqlite3"
-  },
-  "build": {
-    "appId": "com.dxsuporte.crud-electron",
-    "artifactName": "${productName}-${version}-${os}_${arch}.${ext}",
-    "asar": true,
-    "buildDependenciesFromSource": true,
-    "asarUnpack": "**\\*.{node,dll}",
-    "win": {
-      "icon": "./public/img/favicon.ico",
-      "target": [
-        "zip"
-      ]
-    },
-    "linux": {
-      "icon": "./public/img/favicon.svg",
-      "target": [
-        {
-          "target": "deb",
-          "arch": [
-            "x64"
-          ]
-        },
-        {
-          "target": "tar.bz2",
-          "arch": [
-            "x64"
-          ]
-        }
-      ]
-    }
+    "packager-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=./public/img/favicon.ico --prune=false --out=build/ --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"cadastro\""
   },
   "prettier": {
     "trailingComma": "es5",
@@ -62,14 +28,12 @@
     "printWidth": 180
   },
   "devDependencies": {
-    "@electron/rebuild": "^3.6.0",
     "electron": "^29.1.5",
-    "electron-builder": "^24.13.3",
     "electron-packager": "^17.1.2",
     "prettier": "^3.2.5"
   },
   "dependencies": {
-    "better-sqlite3": "^9.4.3",
-    "knex": "^3.1.0"
+    "knex": "^3.1.0",
+    "sqlite3": "^5.1.7"
   }
 }

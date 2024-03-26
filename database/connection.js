@@ -4,7 +4,7 @@ const { createHmac } = require('node:crypto')
 const Path = require('path')
 
 const config = {
-  client: 'better-sqlite3',
+  client: 'sqlite3',
   connection: {
     filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database' : '/database'),
   },
