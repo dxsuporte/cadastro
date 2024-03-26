@@ -37,7 +37,7 @@ window.onload = async () => {
   }
 
   //Edit
-  edit = async (obj) => {
+  const edit = async (obj) => {
     await ipcRenderer.invoke('edit', obj.target.getAttribute('value'))
   }
   ipcRenderer.on('editResponse', (_, result) => {
