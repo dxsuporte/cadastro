@@ -6,11 +6,11 @@ window.onload = async () => {
     ipcRenderer.send('close-window')
   }
   //Login
-  document.getElementById('login').onclick = () => {
+  document.getElementById('login').onclick = async () => {
     const obj = {
       username: document.getElementById('username').value,
       password: document.getElementById('password').value,
     }
-    ipcRenderer.invoke('login', obj)
+    await ipcRenderer.invoke('login', obj)
   }
 }
