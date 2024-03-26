@@ -67,6 +67,10 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
+ipcMain.on('close-window', () => {
+  if (process.platform !== 'darwin') app.quit()
+})
+
 //Login
 ipcMain.handle('login', async (_, obj) => {
   const password = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
