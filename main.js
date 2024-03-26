@@ -8,7 +8,8 @@ const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon
 const { createHmac } = require('node:crypto')
 //Gerenciar View EJS
 const ElectronEjs = require('electron-ejs')
-new ElectronEjs({ TITLE: 'Cadastro básico' }, {})
+const teste = new ElectronEjs({ TITLE: 'Cadastro básico' }, {})
+console.log(teste)
 //File Default
 process.env.BASE_URL = Path.join(__dirname)
 //Secret Crypto
