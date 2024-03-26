@@ -1,13 +1,16 @@
 //Modules for electron
 const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
-//Password Crypto
-const { createHmac } = require('node:crypto')
-//Secret Crypto
-process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 //File and directory
 const Path = require('path')
 //Ico Default
 const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
+//Password Crypto
+const { createHmac } = require('node:crypto')
+//Gerenciar View EJS
+const ElectronEjs = require('electron-ejs')
+new ElectronEjs({ TITLE: 'Cadastro básico' }, {})
+//Secret Crypto
+process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 //Gerenciar Conexão KnexJS SQL
 const DataBase = require(Path.join(__dirname, 'database/connection'))
 
@@ -23,11 +26,13 @@ const createIndex = async () => {
     show: false,
     autoHideMenuBar: true,
     webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
       devTools: true,
       preload: Path.join(__dirname, 'view/index/index.js'),
     },
   })
-  await win.loadFile(Path.join(__dirname, 'view/index/index.html'))
+  await win.loadFile(Path.join(__dirname, 'view/index/index.ejs'))
   win.maximize()
   win.show()
 }
@@ -50,7 +55,7 @@ const loginWindow = async () => {
       preload: Path.join(__dirname, 'view/login/login.js'),
     },
   })
-  await winLogin.loadFile(Path.join(__dirname, 'view/login/login.html'))
+  await winLogin.loadFile(Path.join(__dirname, 'view/login/login.ejs'))
 }
 
 // Iniciar
