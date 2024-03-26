@@ -23,6 +23,7 @@ body {
 
 .card-header {
   grid-area: card-header;
+  -webkit-app-region: drag;
 }
 
 .card-body {
@@ -37,6 +38,7 @@ body {
 
 .card-footer {
   grid-area: card-footer;
+  -webkit-app-region: drag;
 }
 
 .results tr[visible='false'] {

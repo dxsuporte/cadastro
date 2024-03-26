@@ -37,14 +37,15 @@ let winLogin
 const loginWindow = async () => {
   winLogin = new BrowserWindow({
     icon: Icon,
-    width: 800,
-    height: 768,
     maxWidth: 800,
-    maxHeight: 768,
     minWidth: 800,
+    maxHeight: 600,
     minHeight: 600,
+    frame: false,
     autoHideMenuBar: true,
     webPreferences: {
+      nodeIntegration: false,
+      contextIsolation: true,
       devTools: true,
       preload: Path.join(__dirname, 'view/login/login.js'),
     },

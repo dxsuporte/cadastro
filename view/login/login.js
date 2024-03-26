@@ -1,13 +1,11 @@
 const { ipcRenderer } = require('electron')
 
 window.onload = async () => {
-  //Imputs
-  let username = document.getElementById('username')
-  let password = document.getElementById('password')
-  //login
-  const login = document.getElementById('login')
-  login.onclick = () => {
-    const obj = { username: username.value, password: password.value }
+  document.getElementById('login').onclick = () => {
+  const obj = {
+    username: document.getElementById('username').value,
+    password: document.getElementById('password').value,
+  }
     ipcRenderer.invoke('login', obj)
   }
 }
