@@ -38,7 +38,6 @@ body {
 
 .card-footer {
   grid-area: card-footer;
-  -webkit-app-region: drag;
 }
 
 .results tr[visible='false'] {
