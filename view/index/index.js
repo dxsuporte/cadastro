@@ -81,6 +81,6 @@ window.onload = async () => {
 
   //permissions
   if (process.env.authActive != '1') {
-    document.getElementById('divRegister').style.display = 'none'
+    document.getElementById('pane-left').style.display = 'none'
   }
 }
