@@ -9,7 +9,7 @@ window.onload = async () => {
   setTimeout(loadTable, 100)
 
   //Inputs
-  let id = document.getElementById('idProduct')
+  let id = document.getElementById('idHidden')
   let name = document.getElementById('name')
   let surname = document.getElementById('surname')
   let description = document.getElementById('description')
@@ -52,8 +52,6 @@ window.onload = async () => {
     document.getElementById('destroy').classList.remove('d-none')
     //focus
     document.getElementById('description').focus()
-    //ScrollTo Top
-    window.scrollTo(xCoord, yCoord)
   })
 
   //Destroy

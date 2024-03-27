@@ -44,10 +44,10 @@ let winLogin
 const loginWindow = async () => {
   winLogin = new BrowserWindow({
     icon: Icon,
-    maxWidth: 800,
-    minWidth: 800,
-    maxHeight: 600,
-    minHeight: 600,
+    maxWidth: 600,
+    minWidth: 600,
+    maxHeight: 350,
+    minHeight: 350,
     frame: false,
     autoHideMenuBar: true,
     webPreferences: {

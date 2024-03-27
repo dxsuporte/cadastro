@@ -1,5 +1,4 @@
-$(document).ready(() => {
-  'use strict'
+document.addEventListener('DOMContentLoaded', () => {
   /* Inicio Funções*/
 
   /*--------------------------------------------------------------
