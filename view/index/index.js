@@ -50,6 +50,7 @@ window.onload = async () => {
     obs.value = result.obs
     //Class btn Destroy
     document.getElementById('destroy').classList.remove('d-none')
+    document.getElementById('cancel').classList.remove('d-none')
     //focus
     document.getElementById('description').focus()
   })
@@ -78,6 +79,14 @@ window.onload = async () => {
       obj.addEventListener('click', edit)
     })
   })
+
+  //Reload
+  document.getElementById('home').onclick = async () => {
+    await ipcRenderer.invoke('reload')
+  }
+  document.getElementById('cancel').onclick = async () => {
+    await ipcRenderer.invoke('reload')
+  }
 
   //permissions
   if (process.env.authActive != '1') {

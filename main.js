@@ -128,3 +128,8 @@ ipcMain.handle('destroy', async (_, obj) => {
   await DataBase('registers').del().where({ id: obj })
   await win.webContents.reload()
 })
+
+//Reload
+ipcMain.handle('reload', async (_, obj) => {
+  await win.webContents.reload()
+})
