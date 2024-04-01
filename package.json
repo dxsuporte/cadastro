@@ -1,7 +1,7 @@
 {
   "name": "crud-electron",
   "productName": "Register",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic registration",
   "license": "MIT",
   "repository": "https://github.com/dxsuporte/crud-electron",
