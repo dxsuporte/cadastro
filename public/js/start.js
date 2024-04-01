@@ -1,29 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
-  /* Inicio Funções*/
+  /* Start Functions */
 
   /*--------------------------------------------------------------
-  # Variables
+  # Current date
   --------------------------------------------------------------*/
-  const myDia = String(new Date().getDate()).padStart(2, '0')
-  const myMesEx = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][new Date().getMonth()]
-  const myAno = new Date().getFullYear()
-
-  /*--------------------------------------------------------------
-  # Date Footer
-  --------------------------------------------------------------*/
-  document.getElementById('myDate').innerHTML = `${myDia} de ${myMesEx} de ${myAno}`
-
-  /*--------------------------------------------------------------
-  # Clock Footer
-  --------------------------------------------------------------*/
-  setInterval(myTimer, 1000)
-  function myTimer() {
-    const newDate = new Date()
-    const datePtBr = newDate.toLocaleTimeString('pt-BR', {
-      timeZone: 'America/Araguaina',
-    })
-    document.getElementById('myClock').innerHTML = datePtBr
+  const currentDate = () => {
+    const DAY = String(new Date().getDate()).padStart(2, '0')
+    const MONTH = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][new Date().getMonth()]
+    const YEAR = new Date().getFullYear()
+    document.getElementById('myDate').innerHTML = `${DAY} de ${MONTH} de ${YEAR}`
   }
+  currentDate()
+
+  /*--------------------------------------------------------------
+  # Current time
+  --------------------------------------------------------------*/
+  const currentTime = () => {
+    const myClock = new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Araguaina' })
+    document.getElementById('myClock').innerHTML = myClock
+  }
+  setInterval(currentTime, 1000)
+
+  /*--------------------------------------------------------------
+  # Title DropDown
+  --------------------------------------------------------------*/
+  $(() => {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
 
   /*--------------------------------------------------------------
   # Search Table
@@ -47,5 +50,5 @@ document.addEventListener('DOMContentLoaded', () => {
     $('.counter').text(jobCount <= 1 ? `${jobCount} item` : `${jobCount} itens`)
   })
 
-  /**Fim Funções */
+  /* End of Functions */
 })

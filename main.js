@@ -13,10 +13,10 @@ new ElectronEjs({ TITLE: 'Cadastro básico', AUTHOR: 'DX Suporte' })
 process.env.BASE_URL = Path.join(__dirname)
 //Secret Crypto
 process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
-//Gerenciar Conexão KnexJS SQL
+//Manage Connection KnexJS SQL
 const DataBase = require(Path.join(__dirname, 'database/connection'))
 
-//Janela Index
+//Index Window
 let win
 const createIndex = async () => {
   win = new BrowserWindow({
@@ -39,7 +39,7 @@ const createIndex = async () => {
   win.show()
 }
 
-//Janela Login
+//Login Window
 let winLogin
 const loginWindow = async () => {
   winLogin = new BrowserWindow({
@@ -60,7 +60,7 @@ const loginWindow = async () => {
   await winLogin.loadFile(Path.join(__dirname, 'view/login/login.ejs'))
 }
 
-// Iniciar
+// Start
 app.whenReady().then(async () => {
   await loginWindow()
   //await createIndex()
@@ -69,7 +69,7 @@ app.whenReady().then(async () => {
   })
 })
 
-//Fechar
+//To close
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })

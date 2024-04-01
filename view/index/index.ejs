@@ -36,8 +36,8 @@
           <div class="form-group">
             <div class="form-row">
               <div class="mr-auto">
-                <button id="destroy" type="button" class="btn btn-danger btn-sm d-none"><i class="bi bi-trash-fill"></i>&nbsp;Deletar</button>
-                <button id="cancel" type="button" class="btn btn-secondary btn-sm d-none"><i class="bi bi-x-octagon-fill"></i>&nbsp;Cancelar</button>
+                <button id="destroy" type="button" data-toggle="tooltip" title="Deletar" class="btn btn-danger btn-sm d-none"><i class="bi bi-trash-fill"></i></button>
+                <button id="cancel" type="button" data-toggle="tooltip" title="Cancelar" class="btn btn-secondary btn-sm d-none"><i class="bi bi-x-octagon-fill"></i></button>
               </div>
               <div class="ml-auto">
                 <button id="createUpdate" type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check-circle-fill"></i>&nbsp;Salvar</button>
@@ -57,9 +57,9 @@
           <div class="ml-auto mr-2">
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <span class="input-group-text" data-toggle="tooltip" title="Buscar"><i class="bi bi-search"></i></span>
               </div>
-              <input type="text" class="search form-control form-control-sm" placeholder="Procurar..." />
+              <input type="text" class="search form-control form-control-sm" placeholder="Buscar..." />
             </div>
           </div>
         </div>

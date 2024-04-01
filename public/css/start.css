@@ -70,6 +70,7 @@ main {
   padding: 8px;
 }
 
+/*-- #table search --*/
 .results tr[visible='false'] {
   display: none;
 }

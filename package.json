@@ -1,6 +1,6 @@
 {
   "name": "crud-electron",
-  "productName": "Cadastro",
+  "productName": "Register",
   "version": "1.0.0",
   "description": "Basic registration",
   "license": "MIT",
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "electron .",
     "packager-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=./public/img/favicon.png --prune=false --out=build/",
-    "packager-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=./public/img/favicon.ico --prune=false --out=build/ --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"cadastro\""
+    "packager-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=./public/img/favicon.ico --prune=false --out=build/ --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Cadastro\""
   },
   "prettier": {
     "trailingComma": "es5",
