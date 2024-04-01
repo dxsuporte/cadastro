@@ -9,7 +9,7 @@ const { createHmac } = require('node:crypto')
 //Gerenciar View EJS
 const ElectronEjs = require('electron-ejs')
 //Global View variables
-const GlobalView = require(Path.join(__dirname, 'globalView.json'))
+const GlobalView = require(Path.join(__dirname, 'global-view.json'))
 new ElectronEjs(GlobalView)
 //File Default
 process.env.BASE_URL = Path.join(__dirname)
