@@ -4,43 +4,43 @@
   <main>
     <div id="pane-left" class="pane-left">
       <fieldset>
-        <legend class="w-auto h6"><i class="bi bi-pencil-square"></i> <b>Gerenciar registros</b></legend>
+        <legend class="w-auto h6"><%- EDIT.icon %> <b><%- INDEX.name %></b></legend>
         <form action="#">
           <div class="form-group">
             <input id="idHidden" type="hidden" />
           </div>
           <div class="form-group">
-            <label for="description">Especialidade</label>
+            <label for="description"><%- INDEX.inp1 %></label>
             <input id="description" type="text" class="form-control form-control-sm" autofocus />
           </div>
           <div class="form-group">
-            <label for="note">Atuação</label>
+            <label for="note"><%- INDEX.inp2 %></label>
             <input id="note" type="text" class="form-control form-control-sm" />
           </div>
           <div class="form-group">
-            <label for="name">Nome</label>
+            <label for="name"><%- INDEX.inp3 %></label>
             <input id="name" type="text" class="form-control form-control-sm" />
           </div>
           <div class="form-group">
-            <label for="surname">Andar</label>
+            <label for="surname"><%- INDEX.inp4 %></label>
             <input id="surname" type="text" class="form-control form-control-sm" />
           </div>
           <div class="form-group">
-            <label for="phone">Telefone</label>
+            <label for="phone"><%- INDEX.inp5 %></label>
             <input id="phone" type="text" class="form-control form-control-sm" />
           </div>
           <div class="form-group">
-            <label for="obs">Observação</label>
+            <label for="obs"><%- INDEX.inp6 %></label>
             <input id="obs" type="text" class="form-control form-control-sm" />
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="mr-auto">
-                <button id="destroy" type="button" data-toggle="tooltip" title="Deletar" class="btn btn-danger btn-sm d-none"><i class="bi bi-trash-fill"></i></button>
-                <button id="cancel" type="button" data-toggle="tooltip" title="Cancelar" class="btn btn-secondary btn-sm d-none"><i class="bi bi-x-octagon-fill"></i></button>
+                <button id="destroy" type="button" data-toggle="tooltip" title="<%- DELETE.name %>" class="btn btn-danger btn-sm d-none"><%- DELETE.icon %></button>
+                <button id="cancel" type="button" data-toggle="tooltip" title="<%- CANCEL.name %>" class="btn btn-secondary btn-sm d-none"><%- CANCEL.icon %></button>
               </div>
               <div class="ml-auto">
-                <button id="createUpdate" type="submit" class="btn btn-primary btn-sm"><i class="bi bi-check-circle-fill"></i>&nbsp;Salvar</button>
+                <button id="createUpdate" type="submit" class="btn btn-primary btn-sm"><%- SAVE.icon %> <%- SAVE.name %></button>
               </div>
             </div>
           </div>
@@ -49,7 +49,7 @@
     </div>
     <div class="pane">
       <fieldset>
-        <legend class="w-auto h6"><i class="bi bi-table"></i> <b>Lista de registros</b></legend>
+        <legend class="w-auto h6"><%- TABLE.icon %> <b><%- INDEX.list %></b></legend>
         <div class="form-row align-items-center">
           <div class="mr-auto">
             <span class="counter text-muted ml-2"></span>
@@ -57,9 +57,9 @@
           <div class="ml-auto mr-2">
             <div class="input-group input-group-sm mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text" data-toggle="tooltip" title="Buscar"><i class="bi bi-search"></i></span>
+                <span class="input-group-text" data-toggle="tooltip" title="<%- SEARCH.name %>"> <%- SEARCH.icon %></span>
               </div>
-              <input type="text" class="search form-control form-control-sm" placeholder="Buscar..." />
+              <input type="text" class="search form-control form-control-sm" placeholder="<%- SEARCH.name %>..." />
             </div>
           </div>
         </div>
@@ -67,11 +67,11 @@
           <table class="table table-bordered table-hover table-sm text-center results">
             <thead class="thead-light">
               <tr>
-                <th scope="col">Especialidade</th>
-                <th scope="col">Atuação</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Andar</th>
-                <th scope="col">Telefone</th>
+                <th scope="col"><%- INDEX.inp1 %></th>
+                <th scope="col"><%- INDEX.inp2 %></th>
+                <th scope="col"><%- INDEX.inp3 %></th>
+                <th scope="col"><%- INDEX.inp4 %></th>
+                <th scope="col"><%- INDEX.inp5 %></th>
               </tr>
             </thead>
             <tbody id="tbody"></tbody>

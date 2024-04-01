@@ -1,4 +1,24 @@
 {
-  "TITLE": "Cadastro básico",
-  "AUTHOR": "DX Suporte"
+  "TITLE": "Cadastro Básico",
+  "AUTHOR": "DX Suporte",
+  "PASSWORD": { "name": "Senha", "icon": " <i class='bi bi-key-fill'></i> " },
+  "USER": { "name": "Usuário", "icon": " <i class='bi bi-person-circle'></i> " },
+  "SAVE": { "name": "Salvar", "icon": " <i class='bi bi-check-circle-fill'></i> " },
+  "CANCEL": { "name": "Cancelar", "icon": " <i class='bi bi-x-octagon-fill'></i> " },
+  "EDIT": { "name": "Editar", "icon": " <i class='bi bi-pencil-square'></i> " },
+  "DELETE": { "name": "Deletar", "icon": " <i class='bi bi-trash-fill'></i> " },
+  "SEARCH": { "name": "Buscar", "icon": " <i class='bi bi-search'></i> " },
+  "TABLE": { "name": "Tabela", "icon": " <i class='bi bi-table'></i> " },
+  "LOGIN": { "name": "Login", "icon": " <i class='bi bi-box-arrow-right'></i> " },
+  "HOME": { "name": "Home", "icon": " <i class='bi bi-house-fill'></i> " },
+  "INDEX": {
+    "name": "Gerenciar registros",
+    "list": "Lista de registros",
+    "inp1": "Especialidade",
+    "inp2": "Atuação",
+    "inp3": "Nome",
+    "inp4": "Andar",
+    "inp5": "Telefone",
+    "inp6": "Observação"
+  }
 }
