@@ -4,8 +4,6 @@ const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('elec
 const Path = require('path')
 //Ico Default
 const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
-//Password Crypto
-const { createHmac } = require('node:crypto')
 //Gerenciar View EJS
 const ElectronEjs = require('electron-ejs')
 //Global View variables
@@ -15,8 +13,6 @@ new ElectronEjs(GlobalView)
 process.env.BASE_URL = Path.join(__dirname)
 //Secret Crypto
 process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
-//Manage Connection KnexJS SQL
-const DataBase = require(Path.join(__dirname, 'database/connection'))
 
 //Index Window
 let win
@@ -80,58 +76,55 @@ ipcMain.on('close-window', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-//Login
-ipcMain.handle('login', async (_, obj) => {
-  const password = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
-  await DataBase('users')
-    .where({ username: obj.username, password: password })
-    .first()
-    .then(async (result) => {
-      if (result) {
-        process.env.authUser = result.username
-        process.env.authActive = result.active
-        await createIndex()
-        await win.show()
-        await winLogin.close()
-      } else {
-        new Notification({ title: 'Erro', body: 'Usuário ou senha inválidos' }).show()
-      }
-    })
+//Reload
+ipcMain.handle('reload', async (_, obj) => {
+  await win.webContents.reload()
 })
 
-//Index
+//Import User Controller
+const User = require(Path.join(__dirname, 'controller/UserController'))
+
+//Router Login User
+ipcMain.handle('login', async (_, obj) => {
+  const result = await User.login(obj)
+  if (result) {
+    await createIndex()
+    await win.show()
+    await winLogin.close()
+  } else {
+    new Notification({ title: 'Erro', body: 'Usuário ou senha inválidos' }).show()
+  }
+})
+
+//Import Register Controller
+const Register = require(Path.join(__dirname, 'controller/RegisterController'))
+
+//Router Index Register
 ipcMain.handle('index', async () => {
-  const result = await DataBase('registers').orderBy('id', 'desc')
+  const result = await Register.index()
   await win.webContents.send('table', result)
 })
 
-//Edit
+//Router Edit Register
 ipcMain.handle('edit', async (_, obj) => {
-  const result = await DataBase('registers').where({ id: obj }).first()
+  const result = await Register.edit(obj)
   await win.webContents.send('editResponse', result)
 })
 
-//Create
+//Router Create Register
 ipcMain.handle('create', async (_, obj) => {
-  await DataBase('registers').insert({ ...obj })
+  await Register.create(obj)
   await win.webContents.reload()
 })
 
-//Update
+//Router Update Register
 ipcMain.handle('update', async (_, obj) => {
-  await DataBase('registers')
-    .update({ ...obj })
-    .where({ id: obj.id })
+  await Register.update(obj)
   await win.webContents.reload()
 })
 
-//Destroy
+//Router Destroy Register
 ipcMain.handle('destroy', async (_, obj) => {
-  await DataBase('registers').del().where({ id: obj })
-  await win.webContents.reload()
-})
-
-//Reload
-ipcMain.handle('reload', async (_, obj) => {
+  await Register.destroy(obj)
   await win.webContents.reload()
 })
