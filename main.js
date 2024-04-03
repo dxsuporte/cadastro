@@ -13,6 +13,9 @@ new ElectronEjs(GlobalView)
 process.env.BASE_URL = Path.join(__dirname)
 //Secret Crypto
 process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
+//Import Controller
+const User = require(Path.join(__dirname, 'controller/UserController'))
+const Register = require(Path.join(__dirname, 'controller/RegisterController'))
 
 //Index Window
 let win
@@ -81,8 +84,7 @@ ipcMain.handle('reload', async (_, obj) => {
   await win.webContents.reload()
 })
 
-//Import User Controller
-const User = require(Path.join(__dirname, 'controller/UserController'))
+/*------------------Routers------------------------*/
 
 //Router Login User
 ipcMain.handle('login', async (_, obj) => {
@@ -95,9 +97,6 @@ ipcMain.handle('login', async (_, obj) => {
     new Notification({ title: 'Erro', body: 'Usuário ou senha inválidos' }).show()
   }
 })
-
-//Import Register Controller
-const Register = require(Path.join(__dirname, 'controller/RegisterController'))
 
 //Router Index Register
 ipcMain.handle('index', async () => {
