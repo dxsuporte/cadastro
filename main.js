@@ -1,18 +1,21 @@
-//Modules for electron
-const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
-//Dot Env Config
-require('dotenv').config()
 //File and directory
 const Path = require('path')
+//Dot Env Config
+require('dotenv').config()
+//File Default
+process.env.BASE_URL = Path.join(__dirname)
+
+//Modules for electron
+const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
 //Ico Default
 const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
+
 //Gerenciar View EJS
 const ElectronEjs = require('electron-ejs')
 //Global View variables
 const GlobalView = require(Path.join(__dirname, 'global-view.json'))
 new ElectronEjs(GlobalView)
-//File Default
-process.env.BASE_URL = Path.join(__dirname)
+
 //Import Controller
 const User = require(Path.join(__dirname, 'controller/UserController'))
 const Register = require(Path.join(__dirname, 'controller/RegisterController'))
