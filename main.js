@@ -1,5 +1,7 @@
 //Modules for electron
 const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
+//Dot Env Config
+require('dotenv').config()
 //File and directory
 const Path = require('path')
 //Ico Default
@@ -11,8 +13,6 @@ const GlobalView = require(Path.join(__dirname, 'global-view.json'))
 new ElectronEjs(GlobalView)
 //File Default
 process.env.BASE_URL = Path.join(__dirname)
-//Secret Crypto
-process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 //Import Controller
 const User = require(Path.join(__dirname, 'controller/UserController'))
 const Register = require(Path.join(__dirname, 'controller/RegisterController'))
