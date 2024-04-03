@@ -1,19 +1,35 @@
-//Password Crypto
+//Requires
 const { createHmac } = require('node:crypto')
-//File and directory
 const Path = require('path')
 
-const config = {
-  client: 'sqlite3',
-  connection: {
-    filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database' : '/database'),
-  },
-  useNullAsDefault: true,
-  migrations: {
-    tableName: 'migrations',
-    directory: Path.join(__dirname, '/migrations'),
-  },
+//Migrations Config
+const migrations = {
+  tableName: 'migrations',
+  directory: Path.join(__dirname, '/migrations'),
 }
+
+let config
+if (process.env.DB_CONNECTION === 'mysql') {
+  config = {
+    client: 'mysql2',
+    connection: {
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+    },
+    migrations: { ...migrations },
+  }
+} else {
+  config = {
+    client: 'sqlite3',
+    connection: {
+      filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database' : '/database'),
+    },
+    useNullAsDefault: true,
+    migrations: { ...migrations },
+  }
+}
+
 const DataBase = require('knex')(config)
 
 //Verificar ou Criar Database
