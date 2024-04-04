@@ -17,11 +17,11 @@ const start = async () => {
   const ElectronEjs = require('electron-ejs')
   //Global View variables
   const GlobalView = require(Path.join(__dirname, 'global-view.json'))
-  new ElectronEjs(GlobalView)
+  await new ElectronEjs(GlobalView)
 
   //Import Controller
-  const User = require(Path.join(__dirname, 'controller/UserController'))
-  const Register = require(Path.join(__dirname, 'controller/RegisterController'))
+  const User = await require(Path.join(__dirname, 'controller/UserController'))
+  const Register = await require(Path.join(__dirname, 'controller/RegisterController'))
 
   //Index Window
   let win
