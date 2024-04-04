@@ -13,11 +13,9 @@ const start = async () => {
   //Ico Default
   const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
 
-  //Gerenciar View EJS
-  const ElectronEjs = require('electron-ejs')
-  //Global View variables
-  const GlobalView = require(Path.join(__dirname, 'global-view.json'))
-  await new ElectronEjs(GlobalView)
+  //Global View variables and to manage view EJS
+  const GlobalView = await require(Path.join(__dirname, 'global-view.json'))
+  await require('ejs-electron').data(GlobalView).options('debug', false)
 
   //Import Controller
   const User = await require(Path.join(__dirname, 'controller/UserController'))
