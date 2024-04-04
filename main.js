@@ -8,9 +8,8 @@ const start = async () => {
   const Env = await require(Path.join(__dirname, 'env'))
   await Env.index()
 
-  //Modules for electron
+  //Modules for electron and ico Default
   const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
-  //Ico Default
   const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
 
   //Global View variables and to manage view EJS
