@@ -3,10 +3,10 @@ const start = async () => {
 
   //File and directory
   const Path = require('path')
-  //Dot Env Config
-  require('dotenv').config()
-  //File Default
-  process.env.BASE_URL = Path.join(__dirname)
+
+  //Env JS
+  const Env = await require(Path.join(__dirname, 'env'))
+  await Env.index()
 
   //Modules for electron
   const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
