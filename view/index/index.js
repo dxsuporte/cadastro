@@ -17,8 +17,8 @@ window.onload = async () => {
   let phone = document.getElementById('phone')
   let obs = document.getElementById('obs')
 
-  //Create, Update
-  document.getElementById('createUpdate').onclick = async () => {
+  //Store, Update
+  document.getElementById('storeUpdate').onclick = async () => {
     const data = {
       id: id.value,
       name: name.value,
@@ -30,7 +30,7 @@ window.onload = async () => {
     }
     if (!data.id) {
       delete data.id
-      await ipcRenderer.invoke('create', data)
+      await ipcRenderer.invoke('store', data)
     } else {
       await ipcRenderer.invoke('update', data)
     }
@@ -38,7 +38,7 @@ window.onload = async () => {
 
   //Edit
   const edit = async (obj) => {
-    await ipcRenderer.invoke('edit', obj.target.getAttribute('value'))
+    await ipcRenderer.invoke('edit', { id: obj.target.getAttribute('value') })
   }
   ipcRenderer.on('editResponse', (_, result) => {
     id.value = result.id
@@ -48,7 +48,7 @@ window.onload = async () => {
     note.value = result.note
     phone.value = result.phone
     obs.value = result.obs
-    //Class btn Destroy
+    //Class btn Destroy and Cancel
     document.getElementById('destroy').classList.remove('d-none')
     document.getElementById('cancel').classList.remove('d-none')
     //focus
@@ -58,7 +58,7 @@ window.onload = async () => {
   //Destroy
   document.getElementById('destroy').onclick = async () => {
     if (id.value) {
-      await ipcRenderer.invoke('destroy', id.value)
+      await ipcRenderer.invoke('destroy', { id: id.value })
     }
   }
 

@@ -81,6 +81,11 @@ const start = async () => {
     await win.webContents.reload()
   })
 
+  //Notification
+  ipcMain.handle('msg', (_, msg) => {
+    new Notification({ title: msg.title, body: msg.body }).show()
+  })
+
   /*------------------Routers------------------------*/
 
   //Router Login User
@@ -104,12 +109,14 @@ const start = async () => {
   //Router Edit Register
   ipcMain.handle('edit', async (_, obj) => {
     const result = await Register.edit(obj)
-    await win.webContents.send('editResponse', result)
+    if (result) {
+      await win.webContents.send('editResponse', result)
+    }
   })
 
-  //Router Create Register
-  ipcMain.handle('create', async (_, obj) => {
-    await Register.create(obj)
+  //Router Store Register
+  ipcMain.handle('store', async (_, obj) => {
+    await Register.store(obj)
     await win.webContents.reload()
   })
 
