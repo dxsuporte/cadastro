@@ -6,41 +6,60 @@ const DataTable = 'registers'
 
 module.exports = new (class RegisterController {
   async index() {
-    const result = await DataBase(DataTable).orderBy('id', 'desc')
-    return result
+    try {
+      const result = await DataBase(DataTable).orderBy('id', 'desc')
+      return result
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async edit(data) {
-    const result = await DataBase(DataTable)
-      .where({ ...data })
-      .first()
-    return result
+    try {
+      const result = await DataBase(DataTable)
+        .where({ ...data })
+        .first()
+      return result
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async store(data) {
-    console.log(data)
-    if (!data.name || !data.surname) {
-      const msg = { title: 'Error!', body: 'Nome e sobrenome não pode ser nulo!' }
-      await ipcRenderer.invoke('msg', msg)
-    } else {
-      await DataBase(DataTable).insert({ ...data })
+    try {
+      if (!data.name || !data.surname) {
+        const msg = { title: 'Error!', body: 'Nome e sobrenome não pode ser nulo!' }
+        await ipcRenderer.invoke('msg', msg)
+      } else {
+        await DataBase(DataTable).insert({ ...data })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
   async update(data) {
-    if (!data.name || !data.surname) {
-      const msg = { title: 'Error!', body: 'Nome e sobrenome não pode ser nulo!' }
-      await ipcRenderer.invoke('msg', msg)
-    } else {
-      await DataBase(DataTable)
-        .update({ ...data })
-        .where({ id: data.id })
+    try {
+      if (!data.name || !data.surname) {
+        const msg = { title: 'Error!', body: 'Nome e sobrenome não pode ser nulo!' }
+        await ipcRenderer.invoke('msg', msg)
+      } else {
+        await DataBase(DataTable)
+          .update({ ...data })
+          .where({ id: data.id })
+      }
+    } catch (error) {
+      console.log(error)
     }
   }
 
   async destroy(data) {
-    await DataBase(DataTable)
-      .del()
-      .where({ ...data })
+    try {
+      await DataBase(DataTable)
+        .del()
+        .where({ ...data })
+    } catch (error) {
+      console.log(error)
+    }
   }
 })()
