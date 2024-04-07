@@ -81,11 +81,6 @@ const start = async () => {
     await win.webContents.reload()
   })
 
-  //Notification
-  ipcMain.handle('msg', (_, msg) => {
-    new Notification({ title: msg.title, body: msg.body }).show()
-  })
-
   /*------------------Routers------------------------*/
 
   //Router Login User
