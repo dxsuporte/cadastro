@@ -16,10 +16,14 @@ module.exports = new (class RegisterController {
   async destroy() {}
 
   async login(obj) {
-    const password = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
-    const result = await DataBase(DataTable).where({ username: obj.username, password: password }).first()
-    process.env.authUser = result.username
-    process.env.authActive = result.active
-    return result
+    try {
+      const password = createHmac('sha256', process.env.APP_KEY).update(obj.password).digest('hex')
+      const result = await DataBase(DataTable).where({ username: obj.username, password: password }).first()
+      process.env.authUser = result.username
+      process.env.authActive = result.active
+      return result
+    } catch (error) {
+      console.log(error)
+    }
   }
 })()

@@ -18,6 +18,7 @@ module.exports = new (class RegisterController {
   }
 
   async store(data) {
+    console.log(data)
     if (!data.name || !data.surname) {
       const msg = { title: 'Error!', body: 'Nome e sobrenome não pode ser nulo!' }
       await ipcRenderer.invoke('msg', msg)
