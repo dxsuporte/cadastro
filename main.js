@@ -77,7 +77,7 @@ const start = async () => {
   })
 
   //Reload
-  ipcMain.handle('reload', async (_, obj) => {
+  ipcMain.handle('reload', async () => {
     await win.webContents.reload()
   })
 
@@ -89,8 +89,8 @@ const start = async () => {
   /*------------------Routers------------------------*/
 
   //Router Login User
-  ipcMain.handle('login', async (_, obj) => {
-    const result = await User.login(obj)
+  ipcMain.handle('login', async (_, data) => {
+    const result = await User.login(data)
     if (result) {
       await createIndex()
       await win.show()
@@ -107,28 +107,36 @@ const start = async () => {
   })
 
   //Router Edit Register
-  ipcMain.handle('edit', async (_, obj) => {
-    const result = await Register.edit(obj)
+  ipcMain.handle('edit', async (_, data) => {
+    const result = await Register.edit(data)
     if (result) {
       await win.webContents.send('editResponse', result)
     }
   })
 
   //Router Store Register
-  ipcMain.handle('store', async (_, obj) => {
-    await Register.store(obj)
-    await win.webContents.reload()
+  ipcMain.handle('store', async (_, data) => {
+    if (!data.description) {
+      new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+    } else {
+      await Register.store(data)
+      await win.webContents.reload()
+    }
   })
 
   //Router Update Register
-  ipcMain.handle('update', async (_, obj) => {
-    await Register.update(obj)
-    await win.webContents.reload()
+  ipcMain.handle('update', async (_, data) => {
+    if (!data.name) {
+      new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+    } else {
+      await Register.update(data)
+      await win.webContents.reload()
+    }
   })
 
   //Router Destroy Register
-  ipcMain.handle('destroy', async (_, obj) => {
-    await Register.destroy(obj)
+  ipcMain.handle('destroy', async (_, data) => {
+    await Register.destroy(data)
     await win.webContents.reload()
   })
 

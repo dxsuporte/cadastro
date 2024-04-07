@@ -37,8 +37,8 @@ window.onload = async () => {
   }
 
   //Edit
-  const edit = async (obj) => {
-    await ipcRenderer.invoke('edit', { id: obj.target.getAttribute('value') })
+  const edit = async (data) => {
+    await ipcRenderer.invoke('edit', { id: data.target.getAttribute('value') })
   }
   ipcRenderer.on('editResponse', (_, result) => {
     id.value = result.id
@@ -63,9 +63,9 @@ window.onload = async () => {
   }
 
   //Table
-  ipcRenderer.on('table', async (_, obj) => {
+  ipcRenderer.on('table', async (_, data) => {
     let tbody = document.getElementById('tbody')
-    await obj.forEach((result) => {
+    await data.forEach((result) => {
       tbody.innerHTML += `<tr>
         <td value="${result.id}">${result.description || ''}<div class="text-danger"><small>${result.obs || ''}</small></div></td>
         <td value="${result.id}">${result.note || ''}</td>
@@ -75,8 +75,8 @@ window.onload = async () => {
         </tr>`
     })
     //Edit
-    document.querySelectorAll('#tbody td').forEach((obj) => {
-      obj.addEventListener('click', edit)
+    document.querySelectorAll('#tbody td').forEach((data) => {
+      data.addEventListener('click', edit)
     })
   })
 

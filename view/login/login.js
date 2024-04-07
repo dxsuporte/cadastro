@@ -7,10 +7,10 @@ window.onload = async () => {
   }
   //Login
   document.getElementById('login').onclick = async () => {
-    const obj = {
+    const data = {
       username: document.getElementById('username').value,
       password: document.getElementById('password').value,
     }
-    await ipcRenderer.invoke('login', obj)
+    await ipcRenderer.invoke('login', data)
   }
 }
