@@ -1,20 +1,14 @@
 const start = async () => {
   /* Start Functions */
 
-  //File and directory
+  //Path, Env JS and ejs-electron View
   const Path = require('path')
-
-  //Env JS
-  const Env = await require(Path.join(__dirname, 'env'))
-  await Env.index()
+  const { GlobalView } = await require(Path.join(__dirname, 'env')).index()
+  await require('ejs-electron').data(GlobalView).options('debug', false)
 
   //Modules for electron and ico Default
   const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron')
   const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
-
-  //Global View variables and to manage view EJS
-  const GlobalView = await require(Path.join(__dirname, 'global-view.json'))
-  await require('ejs-electron').data(GlobalView).options('debug', false)
 
   //Import Controller
   const User = await require(Path.join(__dirname, 'controller/UserController'))
