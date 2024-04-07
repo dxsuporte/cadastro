@@ -42,7 +42,6 @@ module.exports = new (class env {
         inp6: 'Observação',
       },
     }
-
     return { GlobalView }
   }
 })()

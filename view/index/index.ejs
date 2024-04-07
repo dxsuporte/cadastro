@@ -50,21 +50,8 @@
     <div class="pane">
       <fieldset>
         <legend class="w-auto h6"><%- TABLE.icon %> <b><%- INDEX.list %></b></legend>
-        <div class="form-row align-items-center">
-          <div class="mr-auto">
-            <span class="counter text-muted ml-2"></span>
-          </div>
-          <div class="ml-auto mr-2">
-            <div class="input-group input-group-sm mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" data-toggle="tooltip" title="<%- SEARCH.name %>"> <%- SEARCH.icon %></span>
-              </div>
-              <input type="text" class="search form-control form-control-sm" placeholder="<%- SEARCH.name %>..." />
-            </div>
-          </div>
-        </div>
         <div class="table-responsive">
-          <table class="table table-bordered table-hover table-sm text-center results">
+          <table class="table table-bordered table-hover table-sm text-center dataTable">
             <thead class="thead-light">
               <tr>
                 <th scope="col"><%- INDEX.inp1 %></th>
@@ -81,5 +68,4 @@
     </div>
   </main>
 </section>
-
 <%- include('../include/footer'); %>

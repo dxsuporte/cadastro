@@ -29,26 +29,34 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 
   /*--------------------------------------------------------------
-  # Search Table
+  # FUNÇÃO DATATABLE
   --------------------------------------------------------------*/
-  $('.search').keyup(() => {
-    const searchSplit = $('.search').val().replace(/ /g, "'):containsi('")
-    $.extend($.expr[':'], {
-      containsi: function (elem, i, match, array) {
-        return (elem.textContent || elem.innerText || '').toLowerCase().indexOf((match[3] || '').toLowerCase()) >= 0
+  const dataTable = async () => {
+    await $('.dataTable').dataTable({
+      bJQueryUI: true,
+      order: [],
+      lengthMenu: [
+        [20, 25, 50, -1],
+        [20, 25, 50, 'All'],
+      ],
+      bSort: true,
+      bAutoWidth: false,
+      oLanguage: {
+        sProcessing: 'Processando...',
+        sLengthMenu: "<span title='Resultados por página' aria-hidden='true'>_MENU_</span>",
+        sZeroRecords: 'Não foram encontrados resultados para a sua pesquisa...',
+        sInfo: 'Total de _MAX_ registros',
+        sInfoEmpty: '',
+        sInfoFiltered: '(filtrado _TOTAL_ registros)',
+        sSearch: "<span title='Buscar' aria-hidden='true'>&#128270;</span>",
+        oPaginate: {
+          sNext: "<span aria-hidden='true'>&raquo;</span>",
+          sPrevious: "<span aria-hidden='true'>&laquo;</span>",
+        },
       },
     })
-    $('.results tbody tr')
-      .not(`:containsi('${searchSplit}')`)
-      .each(function (e) {
-        $(this).attr('visible', 'false')
-      })
-    $(`.results tbody tr:containsi('${searchSplit}')`).each(function (e) {
-      $(this).attr('visible', 'true')
-    })
-    const jobCount = $('.results tbody tr[visible="true"]').length
-    $('.counter').text(jobCount <= 1 ? `${jobCount} item` : `${jobCount} itens`)
-  })
+  }
+  setTimeout(dataTable, 150)
 
   /* End of Functions */
 })
