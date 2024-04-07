@@ -72,6 +72,7 @@ const start = async () => {
     if (process.platform !== 'darwin') app.quit()
   })
 
+  //Login to close
   ipcMain.on('close-window', () => {
     if (process.platform !== 'darwin') app.quit()
   })
