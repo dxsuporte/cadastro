@@ -18,13 +18,17 @@
     "packager-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=x64 --icon=./public/img/favicon.ico --prune=false --out=build/ --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Cadastro\""
   },
   "prettier": {
+    "endOfLine": "lf",
     "trailingComma": "es5",
-    "semi": false,
-    "singleQuote": true,
-    "useTabs": false,
-    "quoteProps": "consistent",
-    "bracketSpacing": true,
     "arrowParens": "always",
+    "quoteProps": "consistent",
+    "semi": false,
+    "useTabs": false,
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "jsxSingleQuote": true,
+    "jsxBracketSameLine": false,
+    "tabWidth": 2,
     "printWidth": 180
   },
   "devDependencies": {
