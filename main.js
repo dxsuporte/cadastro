@@ -73,10 +73,10 @@ const start = async () => {
         nodeIntegration: false,
         contextIsolation: true,
         devTools: true,
-        preload: Path.join(__dirname, 'view/login/login.js'),
+        preload: Path.join(__dirname, 'view/login/preload.js'),
       },
     })
-    await winLogin.loadFile(Path.join(__dirname, 'view/login/login.ejs'))
+    await winLogin.loadFile(Path.join(__dirname, 'view/login/index.ejs'))
   }
 
   // Start
