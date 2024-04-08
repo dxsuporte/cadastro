@@ -42,6 +42,12 @@ module.exports = new (class env {
         inp5: 'Telefone',
         inp6: 'Observação',
       },
+      USERS: {
+        name: 'Gerenciar usuários',
+        list: 'Lista de usuários',
+        inp1: 'Nome',
+        inp2: 'Senha',
+      },
     }
     return { GlobalView }
   }

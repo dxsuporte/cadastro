@@ -11,8 +11,8 @@ const start = async () => {
   const Icon = nativeImage.createFromPath(Path.join(__dirname, 'public/img/favicon.png'))
 
   //Import Controller
-  const User = await require(Path.join(__dirname, 'controller/UserController'))
   const Register = await require(Path.join(__dirname, 'controller/RegisterController'))
+  const User = await require(Path.join(__dirname, 'controller/UserController'))
 
   //Index Window
   let win
@@ -29,11 +29,11 @@ const start = async () => {
         nodeIntegration: false,
         contextIsolation: true,
         devTools: true,
-        preload: Path.join(__dirname, 'view/register/preload.js'),
+        preload: Path.join(__dirname, 'view/preload.js'),
       },
     })
 
-    //Link Window
+    /* //Link Window
     win.webContents.setWindowOpenHandler(({ url }) => {
       console.log(url)
       return {
@@ -52,7 +52,7 @@ const start = async () => {
           },
         },
       }
-    })
+    })*/
     await win.loadFile(Path.join(__dirname, 'view/register/index.ejs'))
     win.maximize()
     win.show()
@@ -117,43 +117,82 @@ const start = async () => {
     }
   })
 
-  //Router Index Register
-  ipcMain.handle('index', async () => {
-    const result = await Register.index()
+  //Router Index
+  ipcMain.handle('index', async (_, page) => {
+    let result
+    if (page === 'register') result = await Register.index()
+    if (page === 'user') result = await User.index()
     await win.webContents.send('table', result)
   })
 
-  //Router Edit Register
+  //Router Edit
   ipcMain.handle('edit', async (_, data) => {
-    const result = await Register.edit(data)
+    let result
+    if (data.page === 'register') {
+      delete data.page
+      result = await Register.edit(data)
+    }
+    if (data.page === 'user') {
+      delete data.page
+      result = await User.edit(data)
+    }
     if (result) {
       await win.webContents.send('editResponse', result)
     }
   })
 
-  //Router Store Register
+  //Router Store
   ipcMain.handle('store', async (_, data) => {
-    if (!data.description) {
-      new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
-    } else {
-      await Register.store(data)
-      await win.webContents.reload()
+    if (data.page === 'register') {
+      if (!data.description) {
+        new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+      } else {
+        delete data.page
+        await Register.store(data)
+      }
     }
+    if (data.page === 'user') {
+      if (!data.username || !data.password) {
+        new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+      } else {
+        delete data.page
+        await User.store(data)
+      }
+    }
+    await win.webContents.reload()
   })
 
-  //Router Update Register
+  //Router Update
   ipcMain.handle('update', async (_, data) => {
-    if (!data.name) {
-      new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
-    } else {
-      await Register.update(data)
-      await win.webContents.reload()
+    if (data.page === 'register') {
+      if (!data.description) {
+        new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+      } else {
+        delete data.page
+        await Register.update(data)
+      }
     }
+    if (data.page === 'user') {
+      if (!data.username || !data.password) {
+        new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+      } else {
+        delete data.page
+        await User.update(data)
+      }
+    }
+    await win.webContents.reload()
   })
 
-  //Router Destroy Register
+  //Router Destroy
   ipcMain.handle('destroy', async (_, data) => {
-    await Register.destroy(data)
+    if (data.page === 'register') {
+      delete data.page
+      await Register.destroy(data)
+    }
+    if (data.page === 'user') {
+      delete data.page
+      await User.destroy(data)
+    }
     await win.webContents.reload()
   })
 

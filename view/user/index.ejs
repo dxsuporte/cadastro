@@ -1,0 +1,57 @@
+<%- include('../include/head') %> <%- include('../include/nav') %>
+
+<input id="page" type="hidden" value="user" />
+
+<section>
+  <main>
+    <div id="pane-left" class="pane-left">
+      <fieldset>
+        <legend class="w-auto h6"><%- EDIT.icon %> <b><%- USERS.name %></b></legend>
+        <form action="#">
+          <div class="form-group">
+            <input id="idHidden" type="hidden" />
+          </div>
+          <div class="form-group">
+            <label for="username"><%- USERS.inp1 %></label>
+            <input id="username" type="text" class="form-control form-control-sm" autofocus />
+          </div>
+          <div class="form-group">
+            <label for="password"><%- USERS.inp2 %></label>
+            <input id="password" type="password" class="form-control form-control-sm" />
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="mr-auto">
+                <button id="destroy" type="button" data-toggle="tooltip" title="<%- DELETE.name %>" class="btn btn-danger btn-sm d-none"><%- DELETE.icon %></button>
+                <button id="cancel" type="button" data-toggle="tooltip" title="<%- CANCEL.name %>" class="btn btn-secondary btn-sm d-none"><%- CANCEL.icon %></button>
+              </div>
+              <div class="ml-auto">
+                <button id="storeUpdate" type="submit" class="btn btn-primary btn-sm"><%- SAVE.icon %> <%- SAVE.name %></button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </fieldset>
+    </div>
+    <div class="pane">
+      <fieldset>
+        <legend class="w-auto h6"><%- TABLE.icon %> <b><%- USERS.list %></b></legend>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover table-sm text-center dataTable">
+            <thead class="thead-light">
+              <tr>
+                <th><%- USERS.inp1 %></th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </fieldset>
+    </div>
+  </main>
+</section>
+
+<!-- Renderer Function JS -->
+<script src="./renderer.js"></script>
+
+<%- include('../include/footer'); %>

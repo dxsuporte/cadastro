@@ -5,15 +5,53 @@ const DataBase = require(Path.join(process.env.BASE_URL, 'database/connection'))
 const DataTable = 'users'
 
 module.exports = new (class RegisterController {
-  async index() {}
+  async index() {
+    try {
+      const result = await DataBase(DataTable).orderBy('id', 'desc')
+      return result
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  async edit() {}
+  async edit(data) {
+    try {
+      const result = await DataBase(DataTable)
+        .where({ ...data })
+        .first()
+      return result
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  async create() {}
+  async store(data) {
+    try {
+      await DataBase(DataTable).insert({ ...data })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  async update() {}
+  async update(data) {
+    try {
+      await DataBase(DataTable)
+        .update({ ...data })
+        .where({ id: data.id })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  async destroy() {}
+  async destroy(data) {
+    try {
+      await DataBase(DataTable)
+        .del()
+        .where({ ...data })
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   async login(data) {
     try {

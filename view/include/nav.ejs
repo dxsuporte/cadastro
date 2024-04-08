@@ -2,8 +2,8 @@
   <div class="form-row">
     <div class="mr-auto">
       <div class="btn-group" role="group">
-        <button id="reload" type="button" class="btn btn-secondary btn-sm"><%- REGISTER.icon %> <%- REGISTER.name %></button>
-        <a id="btn-register" href="https://google.com.br" target="framename_b" role="button" class="btn btn-secondary btn-sm"><%- USER.icon %> <%- USER.name %></a>
+        <a id="btn-register" href="<%- process.env.BASE_URL %>/view/register/index.ejs" role="button" class="btn btn-secondary btn-sm"><%- REGISTER.icon %> <%- REGISTER.name %></a>
+        <a id="btn-user" href="<%- process.env.BASE_URL %>/view/user/index.ejs" role="button" class="btn btn-secondary btn-sm"><%- USER.icon %> <%- USER.name %></a>
       </div>
     </div>
     <div class="ml-auto">
