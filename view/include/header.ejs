@@ -1,10 +1,31 @@
-<header>
-  <div class="form-row">
-    <div class="mr-auto">
-      <button id="home" type="button" class="btn btn-secondary btn-sm"><%- HOME.icon %> <%- HOME.name %></button>
-    </div>
-    <div class="ml-auto">
-      <button type="button" class="btn btn-secondary btn-sm"><%- USER.icon %> <%- process.env.authUser %></button>
-    </div>
-  </div>
-</header>
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="description" content="Basic registration" />
+    <meta name="author" content="DX Suporte - Danilo Xavier" />
+    <meta name="generator" content="Visual studio code" />
+    <meta name="keywords" content="NodeJS, ElectronJS Bootstrap" />
+    <title><%- TITLE %></title>
+    <!-- Favicons -->
+    <link href="<%- process.env.BASE_URL %>/public/img/favicon.png" rel="icon" />
+    <!-- Bootstrap -->
+    <link href="<%- process.env.BASE_URL %>/public/vendor/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Icon -->
+    <link href="<%- process.env.BASE_URL %>/public/vendor/bootstrap/css/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Start CSS -->
+    <link href="<%- process.env.BASE_URL %>/public/css/start.css" rel="stylesheet" type="text/css" />
+    <!--jquery -->
+    <script src="<%- process.env.BASE_URL %>/public/vendor/jquery/jquery.min.js"></script>
+    <!-- DataTables JS-->
+    <link rel="stylesheet" type="text/css" href="<%- process.env.BASE_URL %>/public/vendor/DataTables/bootstrap4.min.css" />
+    <script src="<%- process.env.BASE_URL %>/public/vendor/DataTables/dataTables.min.js"></script>
+    <script src="<%- process.env.BASE_URL %>/public/vendor/DataTables/bootstrap4.min.js"></script>
+    <!-- Start JS -->
+    <script src="<%- process.env.BASE_URL %>/public/js/start.js"></script>
+  </head>
+
+  <body>
+    <div class="window">
