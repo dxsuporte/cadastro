@@ -95,5 +95,6 @@ window.addEventListener('DOMContentLoaded', async () => {
   //permissions
   if (process.env.authActive != '1') {
     document.getElementById('pane-left').style.display = 'none'
+    document.getElementById('btn-register').style.display = 'none'
   }
 })
