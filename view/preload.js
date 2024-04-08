@@ -169,7 +169,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
   //Reload
   document.getElementById('cancel').onclick = async () => {
-    await ipcRenderer.invoke('reload')
+    window.location.reload(true)
   }
 
   //permissions

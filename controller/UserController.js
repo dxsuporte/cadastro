@@ -16,6 +16,7 @@ module.exports = new (class RegisterController {
 
   async edit(data) {
     try {
+      delete data.page
       const result = await DataBase(DataTable)
         .where({ ...data })
         .first()
@@ -27,6 +28,7 @@ module.exports = new (class RegisterController {
 
   async store(data) {
     try {
+      delete data.page
       await DataBase(DataTable).insert({ ...data })
     } catch (error) {
       console.log(error)
@@ -35,6 +37,7 @@ module.exports = new (class RegisterController {
 
   async update(data) {
     try {
+      delete data.page
       await DataBase(DataTable)
         .update({ ...data })
         .where({ id: data.id })
@@ -45,6 +48,7 @@ module.exports = new (class RegisterController {
 
   async destroy(data) {
     try {
+      delete data.page
       await DataBase(DataTable)
         .del()
         .where({ ...data })

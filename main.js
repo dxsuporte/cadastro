@@ -98,11 +98,6 @@ const start = async () => {
     if (process.platform !== 'darwin') app.quit()
   })
 
-  //Reload
-  ipcMain.handle('reload', async () => {
-    await win.webContents.reload()
-  })
-
   /*------------------Routers------------------------*/
 
   //Router Login User
@@ -128,14 +123,8 @@ const start = async () => {
   //Router Edit
   ipcMain.handle('edit', async (_, data) => {
     let result
-    if (data.page === 'register') {
-      delete data.page
-      result = await Register.edit(data)
-    }
-    if (data.page === 'user') {
-      delete data.page
-      result = await User.edit(data)
-    }
+    if (data.page === 'register') result = await Register.edit(data)
+    if (data.page === 'user') result = await User.edit(data)
     if (result) {
       await win.webContents.send('editResponse', result)
     }
@@ -147,7 +136,6 @@ const start = async () => {
       if (!data.description) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
-        delete data.page
         await Register.store(data)
       }
     }
@@ -155,7 +143,6 @@ const start = async () => {
       if (!data.username || !data.password) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
-        delete data.page
         await User.store(data)
       }
     }
@@ -168,7 +155,6 @@ const start = async () => {
       if (!data.description) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
-        delete data.page
         await Register.update(data)
       }
     }
@@ -176,7 +162,6 @@ const start = async () => {
       if (!data.username || !data.password) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
-        delete data.page
         await User.update(data)
       }
     }
@@ -185,14 +170,8 @@ const start = async () => {
 
   //Router Destroy
   ipcMain.handle('destroy', async (_, data) => {
-    if (data.page === 'register') {
-      delete data.page
-      await Register.destroy(data)
-    }
-    if (data.page === 'user') {
-      delete data.page
-      await User.destroy(data)
-    }
+    if (data.page === 'register') await Register.destroy(data)
+    if (data.page === 'user') await User.destroy(data)
     await win.webContents.reload()
   })
 
