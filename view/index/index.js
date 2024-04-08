@@ -1,7 +1,11 @@
-window.addEventListener('DOMContentLoaded', async () => {
-  //Import
-  const { ipcRenderer } = require('electron')
+//Import
+const { ipcRenderer, contextBridge } = require('electron')
 
+contextBridge.exposeInMainWorld('myAPI', {
+  desktop: true,
+})
+
+window.addEventListener('DOMContentLoaded', async () => {
   //Index
   const loadTable = async () => {
     await ipcRenderer.invoke('index')

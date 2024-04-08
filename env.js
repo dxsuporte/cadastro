@@ -23,6 +23,7 @@ module.exports = new (class env {
       AUTHOR: 'DX Suporte',
       PASSWORD: { name: 'Senha', icon: " <i class='bi bi-key-fill'></i> " },
       USER: { name: 'Usuário', icon: " <i class='bi bi-person-circle'></i> " },
+      REGISTER: { name: 'Registro', icon: " <i class='bi bi-people'></i> " },
       SAVE: { name: 'Salvar', icon: " <i class='bi bi-check-circle-fill'></i> " },
       CANCEL: { name: 'Cancelar', icon: " <i class='bi bi-x-octagon-fill'></i> " },
       EDIT: { name: 'Editar', icon: " <i class='bi bi-pencil-square'></i> " },
