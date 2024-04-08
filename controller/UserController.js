@@ -1,6 +1,6 @@
 //Requires
 const { createHmac } = require('node:crypto')
-const Path = require('path')
+const Path = require('node:path')
 const DataBase = require(Path.join(process.env.BASE_URL, 'database/connection'))
 const DataTable = 'users'
 

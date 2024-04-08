@@ -1,6 +1,6 @@
 //Requires
 const { createHmac } = require('node:crypto')
-const Path = require('path')
+const Path = require('node:path')
 
 //Migrations Config
 const migrations = {

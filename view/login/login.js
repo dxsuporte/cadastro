@@ -1,6 +1,7 @@
-const { ipcRenderer } = require('electron')
+window.addEventListener('DOMContentLoaded', async () => {
+  //Requires
+  const { ipcRenderer } = require('electron')
 
-window.onload = async () => {
   //Close
   document.getElementById('cancel').onclick = () => {
     ipcRenderer.send('close-window')
@@ -13,4 +14,4 @@ window.onload = async () => {
     }
     await ipcRenderer.invoke('login', data)
   }
-}
+})

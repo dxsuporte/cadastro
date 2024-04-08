@@ -1,5 +1,5 @@
 //Requires
-const Path = require('path')
+const Path = require('node:path')
 const Fs = require('fs')
 
 module.exports = new (class env {

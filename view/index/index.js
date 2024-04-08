@@ -1,7 +1,7 @@
-//Import
-const { ipcRenderer } = require('electron')
+window.addEventListener('DOMContentLoaded', async () => {
+  //Import
+  const { ipcRenderer } = require('electron')
 
-window.onload = async () => {
   //Index
   const loadTable = async () => {
     await ipcRenderer.invoke('index')
@@ -92,4 +92,4 @@ window.onload = async () => {
   if (process.env.authActive != '1') {
     document.getElementById('pane-left').style.display = 'none'
   }
-}
+})
