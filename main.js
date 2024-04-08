@@ -3,7 +3,7 @@ const start = async () => {
 
   //Path, Env JS and ejs-electron View
   const Path = require('node:path')
-  const { GlobalView } = await require(Path.join(__dirname, 'env')).index()
+  const { GlobalView } = await require(Path.join(__dirname, 'env')).start()
   await require('ejs-electron').data(GlobalView).options('debug', false)
 
   //Modules for electron and ico Default
@@ -29,7 +29,7 @@ const start = async () => {
         nodeIntegration: false,
         contextIsolation: true,
         devTools: true,
-        preload: Path.join(__dirname, 'view/index/index.js'),
+        preload: Path.join(__dirname, 'view/register/preload.js'),
       },
     })
 
@@ -53,8 +53,7 @@ const start = async () => {
         },
       }
     })
-
-    await win.loadFile(Path.join(__dirname, 'view/index/index.ejs'))
+    await win.loadFile(Path.join(__dirname, 'view/register/index.ejs'))
     win.maximize()
     win.show()
   }

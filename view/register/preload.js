@@ -85,7 +85,7 @@ window.addEventListener('DOMContentLoaded', async () => {
   })
 
   //Reload
-  document.getElementById('home').onclick = async () => {
+  document.getElementById('reload').onclick = async () => {
     await ipcRenderer.invoke('reload')
   }
   document.getElementById('cancel').onclick = async () => {

@@ -3,7 +3,7 @@ const Path = require('node:path')
 const Fs = require('fs')
 
 module.exports = new (class env {
-  async index() {
+  async start() {
     //DataBase configuration file
     const DataBaseConfig = Path.join(__dirname, __dirname.includes('app.asar') ? '../dbConfig.json' : '/database/dbConfig.json')
     if (!Fs.existsSync(DataBaseConfig)) {
@@ -32,7 +32,7 @@ module.exports = new (class env {
       TABLE: { name: 'Tabela', icon: " <i class='bi bi-table'></i> " },
       LOGIN: { name: 'Login', icon: " <i class='bi bi-box-arrow-right'></i> " },
       HOME: { name: 'Home', icon: " <i class='bi bi-house-fill'></i> " },
-      INDEX: {
+      REGISTERS: {
         name: 'Gerenciar registros',
         list: 'Lista de registros',
         inp1: 'Especialidade',
