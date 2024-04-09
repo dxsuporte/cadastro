@@ -7,7 +7,7 @@ const DataTable = 'users'
 module.exports = new (class RegisterController {
   async index() {
     try {
-      const result = await DataBase(DataTable).orderBy('id', 'desc')
+      const result = await DataBase(DataTable).where('username', '!=', 'root').orderBy('username', 'desc')
       return result
     } catch (error) {
       console.log(error)
