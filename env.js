@@ -21,7 +21,8 @@ module.exports = new (class env {
     //Global variables
     const GlobalView = {
       TITLE: 'Cadastro Básico',
-      AUTHOR: 'DX Suporte',
+      AUTHOR: 'DX Suporte - Danilo Xavier',
+      EMAIL: 'dxsuporteti@gmail.com',
       PASSWORD: { name: 'Senha', icon: " <i class='bi bi-key-fill'></i> " },
       SAVE: { name: 'Salvar', icon: " <i class='bi bi-check-circle-fill'></i> " },
       CANCEL: { name: 'Cancelar', icon: " <i class='bi bi-x-octagon-fill'></i> " },
@@ -48,6 +49,7 @@ module.exports = new (class env {
         list: 'Lista de usuários',
         inp1: 'Nome',
         inp2: 'Senha',
+        inp3: 'Permissão',
       },
     }
 

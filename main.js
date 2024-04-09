@@ -32,7 +32,6 @@ const start = async () => {
         preload: Path.join(__dirname, 'view/preload.js'),
       },
     })
-
     /* //Link Window
     win.webContents.setWindowOpenHandler(({ url }) => {
       console.log(url)
@@ -140,8 +139,8 @@ const start = async () => {
       }
     }
     if (data.page === global.GlobalView.USER.id) {
-      if (!data.username || !data.password) {
-        new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+      if (!data.username || !data.password || !data.active) {
+        new Notification({ title: 'Erro', body: 'Não pode ter valor nulo!' }).show()
       } else {
         await User.store(data)
       }
@@ -159,8 +158,8 @@ const start = async () => {
       }
     }
     if (data.page === global.GlobalView.USER.id) {
-      if (!data.username || !data.password) {
-        new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
+      if (!data.username || !data.password || !data.active) {
+        new Notification({ title: 'Erro', body: 'Não pode ter valor nulo!' }).show()
       } else {
         await User.update(data)
       }

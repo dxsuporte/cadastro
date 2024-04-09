@@ -104,6 +104,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     let id = document.getElementById('idHidden')
     let username = document.getElementById('username')
     let password = document.getElementById('password')
+    let active = document.getElementById('active')
 
     //Store, Update - User
     document.getElementById('storeUpdate').onclick = async () => {
@@ -112,6 +113,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         id: id.value,
         username: username.value,
         password: password.value,
+        active: active.value,
       }
       if (!data.id) {
         delete data.id
@@ -128,6 +130,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     ipcRenderer.on('editResponse', (_, result) => {
       id.value = result.id
       username.value = result.username
+      active.value = result.active
       //Class btn Destroy and Cancel
       document.getElementById('destroy').classList.remove('d-none')
       document.getElementById('cancel').classList.remove('d-none')
@@ -148,6 +151,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       await data.forEach((result) => {
         tbody.innerHTML += `<tr>
           <td value="${result.id}">${result.username}</td>
+          <td value="${result.id}">${result.active == 1 ? 'Admin' : 'Visualização'}</td>
           </tr>`
       })
       //Edit User
