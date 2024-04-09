@@ -18,12 +18,11 @@ module.exports = new (class env {
     //File Default
     process.env.BASE_URL = Path.join(__dirname)
 
+    //Global variables
     const GlobalView = {
       TITLE: 'Cadastro Básico',
       AUTHOR: 'DX Suporte',
       PASSWORD: { name: 'Senha', icon: " <i class='bi bi-key-fill'></i> " },
-      USER: { name: 'Usuário', icon: " <i class='bi bi-person-circle'></i> " },
-      REGISTER: { name: 'Registro', icon: " <i class='bi bi-people'></i> " },
       SAVE: { name: 'Salvar', icon: " <i class='bi bi-check-circle-fill'></i> " },
       CANCEL: { name: 'Cancelar', icon: " <i class='bi bi-x-octagon-fill'></i> " },
       EDIT: { name: 'Editar', icon: " <i class='bi bi-pencil-square'></i> " },
@@ -31,7 +30,9 @@ module.exports = new (class env {
       SEARCH: { name: 'Buscar', icon: " <i class='bi bi-search'></i> " },
       TABLE: { name: 'Tabela', icon: " <i class='bi bi-table'></i> " },
       LOGIN: { name: 'Login', icon: " <i class='bi bi-box-arrow-right'></i> " },
-      HOME: { name: 'Home', icon: " <i class='bi bi-house-fill'></i> " },
+      HOME: { id: 'home', name: 'Home', icon: " <i class='bi bi-house-fill'></i> " },
+      USER: { id: 'user', name: 'Usuário', icon: " <i class='bi bi-person-circle'></i> " },
+      REGISTER: { id: 'register', name: 'Registro', icon: " <i class='bi bi-people'></i> " },
       REGISTERS: {
         name: 'Gerenciar registros',
         list: 'Lista de registros',
@@ -49,6 +50,10 @@ module.exports = new (class env {
         inp2: 'Senha',
       },
     }
+
+    //add global variables NodeJS
+    global.GlobalView = { ...GlobalView }
+
     return { GlobalView }
   }
 })()

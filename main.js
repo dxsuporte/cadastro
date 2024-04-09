@@ -115,16 +115,16 @@ const start = async () => {
   //Router Index
   ipcMain.handle('index', async (_, page) => {
     let result
-    if (page === 'register') result = await Register.index()
-    if (page === 'user') result = await User.index()
+    if (page === global.GlobalView.REGISTER.id) result = await Register.index()
+    if (page === global.GlobalView.USER.id) result = await User.index()
     await win.webContents.send('table', result)
   })
 
   //Router Edit
   ipcMain.handle('edit', async (_, data) => {
     let result
-    if (data.page === 'register') result = await Register.edit(data)
-    if (data.page === 'user') result = await User.edit(data)
+    if (data.page === global.GlobalView.REGISTER.id) result = await Register.edit(data)
+    if (data.page === global.GlobalView.USER.id) result = await User.edit(data)
     if (result) {
       await win.webContents.send('editResponse', result)
     }
@@ -132,14 +132,14 @@ const start = async () => {
 
   //Router Store
   ipcMain.handle('store', async (_, data) => {
-    if (data.page === 'register') {
+    if (data.page === global.GlobalView.REGISTER.id) {
       if (!data.description) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
         await Register.store(data)
       }
     }
-    if (data.page === 'user') {
+    if (data.page === global.GlobalView.USER.id) {
       if (!data.username || !data.password) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
@@ -151,14 +151,14 @@ const start = async () => {
 
   //Router Update
   ipcMain.handle('update', async (_, data) => {
-    if (data.page === 'register') {
+    if (data.page === global.GlobalView.REGISTER.id) {
       if (!data.description) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
         await Register.update(data)
       }
     }
-    if (data.page === 'user') {
+    if (data.page === global.GlobalView.USER.id) {
       if (!data.username || !data.password) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
@@ -170,8 +170,8 @@ const start = async () => {
 
   //Router Destroy
   ipcMain.handle('destroy', async (_, data) => {
-    if (data.page === 'register') await Register.destroy(data)
-    if (data.page === 'user') await User.destroy(data)
+    if (data.page === global.GlobalView.REGISTER.id) await Register.destroy(data)
+    if (data.page === global.GlobalView.USER.id) await User.destroy(data)
     await win.webContents.reload()
   })
 

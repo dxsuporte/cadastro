@@ -1,10 +1,6 @@
 //Import
 const { ipcRenderer, contextBridge } = require('electron')
 
-contextBridge.exposeInMainWorld('myAPI', {
-  desktop: true,
-})
-
 window.addEventListener('DOMContentLoaded', async () => {
   //Page Variable
   const page = document.getElementById('page').value
