@@ -1,10 +1,10 @@
 const start = async () => {
   /* Start Functions */
 
-  //Path, Env JS and ejs-electron View
+  //Path, myStart.js and ejs-electron View
   const Path = require('node:path')
-  const { GlobalView } = await require(Path.join(__dirname, 'env')).start()
-  await require('ejs-electron').data(GlobalView).options('debug', false)
+  const { myGlobal } = await require(Path.join(__dirname, 'myStart')).start()
+  await require('ejs-electron').data(myGlobal).options('debug', false)
 
   //Modules for electron and ico Default
   const { app, BrowserWindow, ipcMain, nativeImage, Notification } = require('electron/main')
@@ -114,16 +114,16 @@ const start = async () => {
   //Router Index
   ipcMain.handle('index', async (_, page) => {
     let result
-    if (page === global.GlobalView.REGISTER.id) result = await Register.index()
-    if (page === global.GlobalView.USER.id) result = await User.index()
+    if (page === global.myGlobal.REGISTER.id) result = await Register.index()
+    if (page === global.myGlobal.USER.id) result = await User.index()
     await win.webContents.send('table', result)
   })
 
   //Router Edit
   ipcMain.handle('edit', async (_, data) => {
     let result
-    if (data.page === global.GlobalView.REGISTER.id) result = await Register.edit(data)
-    if (data.page === global.GlobalView.USER.id) result = await User.edit(data)
+    if (data.page === global.myGlobal.REGISTER.id) result = await Register.edit(data)
+    if (data.page === global.myGlobal.USER.id) result = await User.edit(data)
     if (result) {
       await win.webContents.send('editResponse', result)
     }
@@ -131,14 +131,14 @@ const start = async () => {
 
   //Router Store
   ipcMain.handle('store', async (_, data) => {
-    if (data.page === global.GlobalView.REGISTER.id) {
+    if (data.page === global.myGlobal.REGISTER.id) {
       if (!data.description) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
         await Register.store(data)
       }
     }
-    if (data.page === global.GlobalView.USER.id) {
+    if (data.page === global.myGlobal.USER.id) {
       if (!data.username || !data.password || !data.active) {
         new Notification({ title: 'Erro', body: 'Não pode ter valor nulo!' }).show()
       } else {
@@ -150,14 +150,14 @@ const start = async () => {
 
   //Router Update
   ipcMain.handle('update', async (_, data) => {
-    if (data.page === global.GlobalView.REGISTER.id) {
+    if (data.page === global.myGlobal.REGISTER.id) {
       if (!data.description) {
         new Notification({ title: 'Erro', body: 'Especialidade não pode ser nulo!' }).show()
       } else {
         await Register.update(data)
       }
     }
-    if (data.page === global.GlobalView.USER.id) {
+    if (data.page === global.myGlobal.USER.id) {
       if (!data.username || !data.password || !data.active) {
         new Notification({ title: 'Erro', body: 'Não pode ter valor nulo!' }).show()
       } else {
@@ -169,8 +169,8 @@ const start = async () => {
 
   //Router Destroy
   ipcMain.handle('destroy', async (_, data) => {
-    if (data.page === global.GlobalView.REGISTER.id) await Register.destroy(data)
-    if (data.page === global.GlobalView.USER.id) await User.destroy(data)
+    if (data.page === global.myGlobal.REGISTER.id) await Register.destroy(data)
+    if (data.page === global.myGlobal.USER.id) await User.destroy(data)
     await win.webContents.reload()
   })
 

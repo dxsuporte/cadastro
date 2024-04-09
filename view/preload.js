@@ -1,17 +1,16 @@
 //Import
-const { ipcRenderer, contextBridge } = require('electron')
+const { ipcRenderer } = require('electron')
 
 window.addEventListener('DOMContentLoaded', async () => {
   //Page Variable
   const page = document.getElementById('page').value
-  //Function Register
+
+  /* Function Register */
   const startRegister = async () => {
     /* Start Functions Register */
 
     //Index register
-    const loadTable = async () => {
-      await ipcRenderer.invoke('index', page)
-    }
+    const loadTable = async () => await ipcRenderer.invoke('index', page)
     setTimeout(loadTable, 100)
 
     //Inputs register
@@ -64,9 +63,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     //Destroy register
     document.getElementById('destroy').onclick = async () => {
-      if (id.value) {
-        await ipcRenderer.invoke('destroy', { id: id.value, page: page })
-      }
+      if (id.value) await ipcRenderer.invoke('destroy', { id: id.value, page: page })
     }
 
     //Table register
@@ -90,14 +87,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     /* End of Functions Registe */
   }
 
-  //Function User
+  /* Function User */
   const startUser = async () => {
     /* Start Functions User */
 
     //Index User
-    const loadTable = async () => {
-      await ipcRenderer.invoke('index', page)
-    }
+    const loadTable = async () => await ipcRenderer.invoke('index', page)
     setTimeout(loadTable, 100)
 
     //Inputs User
@@ -140,9 +135,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     //Destroy User
     document.getElementById('destroy').onclick = async () => {
-      if (id.value) {
-        await ipcRenderer.invoke('destroy', { id: id.value, page: page })
-      }
+      if (id.value) await ipcRenderer.invoke('destroy', { id: id.value, page: page })
     }
 
     //Table User

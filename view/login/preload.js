@@ -1,7 +1,6 @@
 window.addEventListener('DOMContentLoaded', async () => {
   //Requires
   const { ipcRenderer } = require('electron')
-
   //Close
   document.getElementById('cancel').onclick = () => {
     ipcRenderer.send('close-window')

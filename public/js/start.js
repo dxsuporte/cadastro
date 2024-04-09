@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
       bJQueryUI: true,
       order: [],
       lengthMenu: [
-        [20, 25, 50, -1],
-        [20, 25, 50, 'All'],
+        [20, 25, 50, 100, -1],
+        [20, 25, 50, 100, 'All'],
       ],
       bSort: true,
       bAutoWidth: false,

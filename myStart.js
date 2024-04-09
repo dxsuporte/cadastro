@@ -2,13 +2,14 @@
 const Path = require('node:path')
 const Fs = require('fs')
 
-module.exports = new (class env {
+module.exports = new (class myStart {
   async start() {
     //DataBase configuration file
     const DataBaseConfig = Path.join(__dirname, __dirname.includes('app.asar') ? '../dbConfig.json' : '/database/dbConfig.json')
     if (!Fs.existsSync(DataBaseConfig)) {
       Fs.writeFileSync(DataBaseConfig, JSON.stringify({ DB_CONNECTION: '', DB_NAME: '', DB_USER: '', DB_PASSWORD: '' }))
     }
+    //Config variable ENV
     const DataBase = require(DataBaseConfig)
     process.env.DB_CONNECTION = DataBase.DB_CONNECTION
     process.env.DB_NAME = DataBase.DB_NAME
@@ -19,7 +20,7 @@ module.exports = new (class env {
     process.env.BASE_URL = Path.join(__dirname)
 
     //Global variables
-    const GlobalView = {
+    const myGlobal = {
       TITLE: 'Cadastro Básico',
       AUTHOR: 'DX Suporte - Danilo Xavier',
       EMAIL: 'dxsuporteti@gmail.com',
@@ -54,8 +55,8 @@ module.exports = new (class env {
     }
 
     //add global variables NodeJS
-    global.GlobalView = { ...GlobalView }
+    global.myGlobal = { ...myGlobal }
 
-    return { GlobalView }
+    return { myGlobal }
   }
 })()

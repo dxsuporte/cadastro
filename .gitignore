@@ -2,5 +2,4 @@
 /database/database
 /dist
 /build
-.env
 .vscode
