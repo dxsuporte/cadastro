@@ -32,26 +32,6 @@ const start = async () => {
         preload: Path.join(__dirname, 'view/preload.js'),
       },
     })
-    /* //Link Window
-    win.webContents.setWindowOpenHandler(({ url }) => {
-      console.log(url)
-      return {
-        action: 'allow',
-        overrideBrowserWindowOptions: {
-          icon: Icon,
-          width: 1024,
-          height: 768,
-          minWidth: 800,
-          minHeight: 600,
-          autoHideMenuBar: true,
-          webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true,
-            devTools: true,
-          },
-        },
-      }
-    })*/
     await win.loadFile(Path.join(__dirname, 'view/register/index.ejs'))
     win.maximize()
     win.show()

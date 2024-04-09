@@ -22,7 +22,7 @@ module.exports = new (class myStart {
     //Global variables
     const myGlobal = {
       TITLE: 'Cadastro Básico',
-      AUTHOR: 'DX Suporte - Danilo Xavier',
+      AUTHOR: 'DX Suporte',
       EMAIL: 'dxsuporteti@gmail.com',
       PASSWORD: { name: 'Senha', icon: " <i class='bi bi-key-fill'></i> " },
       SAVE: { name: 'Salvar', icon: " <i class='bi bi-check-circle-fill'></i> " },
