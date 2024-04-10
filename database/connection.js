@@ -20,17 +20,10 @@ if (process.env.DB_CONNECTION === 'mysql') {
     migrations: { ...migrations },
   }
 } else {
-  //File Platform DataBase
-  let database
-  if (process.platform === 'linux') {
-    database = `${process.env.HOME}/.${process.env.npm_package_name}/`
-  } else if (process.platform === 'win32') {
-    database = `${process.env.APPDATA}\\${process.env.npm_package_name}\\`
-  }
   config = {
     client: 'sqlite3',
     connection: {
-      filename: Path.join(__dirname, __dirname.includes('app.asar') ? `${database}/database` : '/database'),
+      filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database' : '/database'),
     },
     useNullAsDefault: true,
     migrations: { ...migrations },

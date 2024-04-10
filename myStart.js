@@ -4,15 +4,8 @@ const Fs = require('fs')
 
 module.exports = new (class myStart {
   async start() {
-    //File Platform dbConfig.json
-    let dbConfig
-    if (process.platform === 'linux') {
-      dbConfig = `${process.env.HOME}/.${process.env.npm_package_name}/`
-    } else if (process.platform === 'win32') {
-      dbConfig = `${process.env.APPDATA}\\${process.env.npm_package_name}\\`
-    }
     //DataBase configuration file
-    const DataBaseConfig = Path.join(__dirname, __dirname.includes('app.asar') ? `${dbConfig}/dbConfig.json` : '/database/dbConfig.json')
+    const DataBaseConfig = Path.join(__dirname, __dirname.includes('app.asar') ? '../dbConfig.json' : '/database/dbConfig.json')
     if (!Fs.existsSync(DataBaseConfig)) {
       Fs.writeFileSync(DataBaseConfig, JSON.stringify({ DB_CONNECTION: '', DB_NAME: '', DB_USER: '', DB_PASSWORD: '' }))
     }
