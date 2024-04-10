@@ -1,9 +1,9 @@
 const start = async () => {
   /* Start Functions */
 
-  //Path, myStart.js and ejs-electron View
+  //Path, my-start.js and ejs-electron View
   const Path = require('node:path')
-  const { myGlobal } = await require(Path.join(__dirname, 'myStart')).start()
+  const { myGlobal } = await require(Path.join(__dirname, 'my-start')).start()
   await require('ejs-electron').data(myGlobal).options('debug', false)
 
   //Modules for electron and ico Default
