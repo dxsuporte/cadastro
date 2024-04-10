@@ -5,13 +5,13 @@ const Fs = require('fs')
 module.exports = new (class myStart {
   async start() {
     try {
-      let DB_FILE_CONFIG = 'database/dbConfig.json'
+      let DB_FILE_CONFIG = 'database/db-config.json'
       let DB_FILE = 'database/database.sql'
 
       if (__dirname.includes('app.asar')) {
         const ASAR_FILE = `${process.env.HOME}/.${process.argv0}/`
         if (!Fs.existsSync(ASAR_FILE)) Fs.mkdirSync(ASAR_FILE, { recursive: true })
-        DB_FILE_CONFIG = `../../../../../${ASAR_FILE}dbConfig.json`
+        DB_FILE_CONFIG = `../../../../../${ASAR_FILE}db-config.json`
         DB_FILE = `../../../../../../${ASAR_FILE}database.sql`
       }
 
@@ -20,7 +20,7 @@ module.exports = new (class myStart {
       }
 
       //Config variable ENV
-      const DataBase = require(Path.join(__dirname, 'database/dbConfig.json'))
+      const DataBase = require(Path.join(__dirname, DB_FILE_CONFIG))
       process.env.DB_CONNECTION = DataBase.DB_CONNECTION
       process.env.DB_NAME = DataBase.DB_NAME
       process.env.DB_USER = DataBase.DB_USER

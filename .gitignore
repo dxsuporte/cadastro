@@ -1,6 +1,6 @@
 /node_modules
-/database/*.json
-/database/*.sql
+/database/db-config.json
+/database/database.sql
 /dist
 /build
 .vscode
