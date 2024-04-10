@@ -23,7 +23,7 @@ if (process.env.DB_CONNECTION === 'mysql') {
   config = {
     client: 'sqlite3',
     connection: {
-      filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database' : '/database'),
+      filename: Path.join(__dirname, __dirname.includes('app.asar') ? '../../database/database' : '/database'),
     },
     useNullAsDefault: true,
     migrations: { ...migrations },
