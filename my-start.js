@@ -5,32 +5,44 @@ const Fs = require('fs')
 module.exports = new (class myStart {
   async start() {
     try {
-      let DB_FILE_CONFIG = 'database/db-config.json'
-      let DB_FILE = 'database/database.sql'
+      //Variável do aquivo de configuração do banco de dados
+      let FILE_CONFIG_DB = Path.join(__dirname, 'database/db-config.json')
+      //Variável do aquivo de banco de dados
+      let DB_FILE = Path.join(__dirname, 'database/database.sql')
+      //Variável do diretório do ASAR
+      let ASAR_FILE = `${process.env.HOME}/.${process.argv0}/`
 
+      //Se o diretório for compilado com ASAR
       if (__dirname.includes('app.asar')) {
-        const ASAR_FILE = `${process.env.HOME}/.${process.argv0}/`
-        if (!Fs.existsSync(ASAR_FILE)) Fs.mkdirSync(ASAR_FILE, { recursive: true })
-        DB_FILE_CONFIG = `../../../../../${ASAR_FILE}db-config.json`
-        DB_FILE = `../../../../../../${ASAR_FILE}database.sql`
+        //tocas os diretórios do aquivo de banco de dado
+        FILE_CONFIG_DB = Path.join(`${ASAR_FILE}db-config.json`)
+        DB_FILE = Path.join(`${ASAR_FILE}database.sql`)
+        //Se a o sistema for Windows
+        if (process.platform === 'win32') {
+          //DB_FILE = `${process.env.APPDATA}\\${process.env.APP_NAME}\\${process.env.NODE_ENV}\\`
+        }
+        //Se não existir, cria a pasta
+        if (!Fs.existsSync(ASAR_FILE)) {
+          Fs.mkdirSync(ASAR_FILE, { recursive: true })
+        }
       }
 
-      if (!Fs.existsSync(DB_FILE_CONFIG)) {
-        Fs.writeFileSync(DB_FILE_CONFIG, JSON.stringify({ DB_CONNECTION: '', DB_NAME: '', DB_USER: '', DB_PASSWORD: '' }))
+      //Se não existir cria o aquivo de configuração do banco de dados
+      if (!Fs.existsSync(FILE_CONFIG_DB)) {
+        Fs.writeFileSync(FILE_CONFIG_DB, JSON.stringify({ DB_CONNECTION: '', DB_NAME: '', DB_USER: '', DB_PASSWORD: '' }))
       }
 
-      //Config variable ENV
-      const DataBase = require(Path.join(__dirname, DB_FILE_CONFIG))
+      //Configuração da variáveis global ENV
+      const DataBase = require(FILE_CONFIG_DB)
+      process.env.DB_FILE = DB_FILE
       process.env.DB_CONNECTION = DataBase.DB_CONNECTION
       process.env.DB_NAME = DataBase.DB_NAME
       process.env.DB_USER = DataBase.DB_USER
       process.env.DB_PASSWORD = DataBase.DB_PASSWORD
-      process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
-      process.env.DB_FILE = Path.join(__dirname, DB_FILE)
-      //File Default
       process.env.BASE_URL = Path.join(__dirname)
+      process.env.APP_KEY = '7tHZV-E2iyWajI9vu1m4MKF8-r5GVxIE'
 
-      //Global variables
+      //Variáveis Global da View ejs
       const myGlobal = {
         TITLE: 'Cadastro Básico',
         AUTHOR: 'DX Suporte',
@@ -64,12 +76,12 @@ module.exports = new (class myStart {
           inp3: 'Permissão',
         },
       }
-
-      //add global variables NodeJS
+      //Adicionar as variáveis no global do NodeJS
       global.myGlobal = { ...myGlobal }
-
+      //Retorna para main com as variável global
       return { myGlobal }
     } catch (error) {
+      //tratamento de erro
       console.log(error)
     }
   }
