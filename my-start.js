@@ -10,7 +10,7 @@ module.exports = new (class myStart {
       //Variável do aquivo de banco de dados
       let DB_FILE = Path.join(__dirname, 'database/database.sql')
       //Variável do diretório do ASAR
-      let ASAR_FILE = `${process.env.HOME}/.${process.argv0}/`
+      let ASAR_FILE = `${process.env.HOME}/.cadastro/`
 
       //Se o diretório for compilado com ASAR
       if (__dirname.includes('app.asar')) {
@@ -19,7 +19,9 @@ module.exports = new (class myStart {
         DB_FILE = Path.join(`${ASAR_FILE}database.sql`)
         //Se a o sistema for Windows
         if (process.platform === 'win32') {
-          //DB_FILE = `${process.env.APPDATA}\\${process.env.APP_NAME}\\${process.env.NODE_ENV}\\`
+          ASAR_FILE = `${process.env.APPDATA}/.cadastro/`
+          FILE_CONFIG_DB = Path.join(`${ASAR_FILE}db-config.json`)
+          DB_FILE = Path.join(`${ASAR_FILE}database.sql`)
         }
         //Se não existir, cria a pasta
         if (!Fs.existsSync(ASAR_FILE)) {
