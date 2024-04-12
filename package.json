@@ -14,12 +14,10 @@
   },
   "scripts": {
     "start": "electron .",
-    "pkg-linux": "electron-packager . --overwrite --asar true --platform linux --arch x64 --icon ./public/img/favicon.png --prune true --out build/ --productName Cadastro",
-    "pkg-win": "electron-packager . --overwrite --asar true --platform win32 --arch x64 --icon ./public/img/favicon.ico --prune true --out build/ --version-string.CompanyName CE --version-string.FileDescription CE --version-string.ProductName \"Cadastro\"",
-    "pkg-zip-linux": "electron-installer-zip build/*-linux-x64/ build/cadastro-linux-x64.zip",
-    "pkg-zip-win": "electron-installer-zip build/*-win32-x64/ build/cadastro-win32-x64.zip",
-    "pkg-elec-deb": "electron-installer-debian --src build/*-linux-x64/ --dest build/ --arch amd64 --icon ./public/img/favicon.png --bin Cadastro",
-    "pkg-elec-win": "electron-installer-windows --src build/Cadastro-win32-x64/ --dest build/ --icon ./public/img/favicon.ico",
+    "pkg-linux": "electron-packager . --overwrite --asar true --platform linux --arch x64 --icon ./public/img/favicon.png --prune true --out dist/ --productName Cadastro",
+    "pkg-win": "electron-packager . --overwrite --asar true --platform win32 --arch x64 --icon ./public/img/favicon.ico --prune true --out dist/ --version-string.CompanyName CE --version-string.FileDescription CE --version-string.ProductName \"Cadastro\"",
+    "pkg-zip-linux": "electron-installer-zip dist/*-linux-x64/ dist/cadastro-linux-x64.zip",
+    "pkg-zip-win": "electron-installer-zip dist/*-win32-x64/ dist/cadastro-win32-x64.zip",
     "pkg-build": "npm run pkg-linux && npm run pkg-win && npm run pkg-zip-linux && npm run pkg-zip-win",
     "build": "electron-builder",
     "build-linux": "electron-builder --linux",
@@ -29,8 +27,15 @@
     "appId": "com.dxsuporte.cadastro",
     "artifactName": "${productName}-${version}-${os}_${arch}.${ext}",
     "asar": true,
+    "asarUnpack": [
+      "**\\*.{node,dll}",
+      "extra",
+      "node_modules/sqlite3"
+    ],
     "buildDependenciesFromSource": true,
-    "asarUnpack": "**\\*.{node,dll}",
+    "directories": {
+      "output": "build/${arch}"
+    },
     "linux": {
       "icon": "./public/img/favicon.svg",
       "target": [
@@ -84,15 +89,13 @@
     "@electron/packager": "^18.3.2",
     "electron": "^29.1.5",
     "electron-builder": "^24.13.3",
-    "electron-installer-debian": "^3.2.0",
-    "electron-installer-windows": "^3.0.0",
     "electron-installer-zip": "^0.1.2",
     "prettier": "^3.2.5"
   },
   "dependencies": {
     "ejs-electron": "^3.0.0",
     "knex": "^3.1.0",
-    "mysql2": "^3.9.3",
+    "mysql2": "^3.9.4",
     "sqlite3": "^5.1.7"
   }
 }
