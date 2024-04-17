@@ -59,7 +59,7 @@ const start = async () => {
   }
 
   // Start
-  app.whenReady().then(async () => {
+  await app.whenReady().then(async () => {
     await loginWindow()
     //await createIndex()
     app.on('activate', async () => {
@@ -68,12 +68,12 @@ const start = async () => {
   })
 
   //To close
-  app.on('window-all-closed', () => {
+  app.on('window-all-closed', async () => {
     if (process.platform !== 'darwin') app.quit()
   })
 
   //Login to close
-  ipcMain.on('close-window', () => {
+  ipcMain.on('close-window', async () => {
     if (process.platform !== 'darwin') app.quit()
   })
 

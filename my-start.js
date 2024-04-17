@@ -1,6 +1,6 @@
 //Requires
 const Path = require('node:path')
-const Fs = require('fs')
+const Fs = require('node:fs')
 
 module.exports = new (class myStart {
   async start() {
