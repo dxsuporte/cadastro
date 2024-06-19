@@ -50,6 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
           extend: 'pdf',
+          orientation: 'landscape',
+          pageSize: 'TABLOID',
+          footer: true,
           text: '<i class="bi bi-file-earmark-pdf-fill"></i> PDF',
           titleAttr: 'PDF',
           className: 'btn btn-outline-danger btn-sm mt-2 mb-2',
