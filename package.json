@@ -1,7 +1,7 @@
 {
   "name": "cadastro",
   "productName": "Cadastro",
-  "version": "2.0.2",
+  "version": "2.0.4",
   "description": "Cadastro básico",
   "license": "MIT",
   "repository": "https://github.com/dxsuporte/cadastro",
@@ -21,7 +21,8 @@
     "pkg-build": "npm run pkg-linux && npm run pkg-win && npm run pkg-zip-linux && npm run pkg-zip-win",
     "build": "electron-builder",
     "build-linux": "electron-builder --linux",
-    "build-win": "electron-builder --win"
+    "build-win": "electron-builder --win",
+    "compile": "npm run build-linux && npm run build-win"
   },
   "build": {
     "appId": "com.dxsuporte.cadastro",

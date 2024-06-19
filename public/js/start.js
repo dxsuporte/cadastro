@@ -35,6 +35,29 @@ document.addEventListener('DOMContentLoaded', () => {
     await $('.dataTable').dataTable({
       bJQueryUI: true,
       order: [],
+      layout: {
+        top1Start: ['buttons'],
+      },
+      buttons: [
+        {
+          extend: 'csv',
+          text: '<i class="bi bi-database-fill-down"></i> CSV',
+          titleAttr: 'CSV',
+          className: 'btn btn-outline-primary btn-sm mt-2 mb-2',
+          title: function () {
+            return $('#dt-title').html()
+          },
+        },
+        {
+          extend: 'pdf',
+          text: '<i class="bi bi-file-earmark-pdf-fill"></i> PDF',
+          titleAttr: 'PDF',
+          className: 'btn btn-outline-danger btn-sm mt-2 mb-2',
+          title: function () {
+            return $('#dt-title').html()
+          },
+        },
+      ],
       lengthMenu: [
         [10, 25, 50, 100, -1],
         [10, 25, 50, 100, 'Todos'],
@@ -53,6 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
           sNext: "<span aria-hidden='true'>&raquo;</span>",
           sPrevious: "<span aria-hidden='true'>&laquo;</span>",
         },
+      },
+      language: {
+        emptyTable: 'Sem dados disponíveis na tabela',
       },
     })
   }

@@ -69,3 +69,8 @@ main {
   border-left: 1px solid #ddd;
   padding: 8px;
 }
+
+table.dataTable {
+  margin-top:1em !important;  
+  margin-bottom:1em !important;  
+}
