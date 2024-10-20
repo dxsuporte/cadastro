@@ -2,24 +2,19 @@ document.addEventListener('DOMContentLoaded', () => {
   /* Start Functions */
 
   /*--------------------------------------------------------------
-  # Current date
+  # Relógio, Time|Data|Zone - Footer
   --------------------------------------------------------------*/
-  const currentDate = () => {
-    const DAY = String(new Date().getDate()).padStart(2, '0')
-    const MONTH = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'][new Date().getMonth()]
-    const YEAR = new Date().getFullYear()
-    document.getElementById('myDate').innerHTML = `${DAY} de ${MONTH} de ${YEAR}`
+  function myDataTimerFooter() {
+    const ZoneOpt = { timeZoneName: 'long' }
+    const newTime = new Date().toLocaleTimeString('pt-br')
+    const newZone = new Date().toLocaleTimeString('pt-br', ZoneOpt).substring(9)
+    document.getElementById('myTimeClock').innerHTML = newTime
+    document.getElementById('myTimeClock').setAttribute('title', newZone)
+    const DateOpt = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }
+    const newDate = new Date().toLocaleDateString('pt-br', DateOpt)
+    document.getElementById('myDateClock').innerHTML = newDate
   }
-  currentDate()
-
-  /*--------------------------------------------------------------
-  # Current time
-  --------------------------------------------------------------*/
-  const currentTime = () => {
-    const myClock = new Date().toLocaleTimeString('pt-BR', { timeZone: 'America/Araguaina' })
-    document.getElementById('myClock').innerHTML = myClock
-  }
-  setInterval(currentTime, 1000)
+  setInterval(myDataTimerFooter, 1000)
 
   /*--------------------------------------------------------------
   # Title DropDown
